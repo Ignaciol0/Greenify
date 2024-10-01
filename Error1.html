@@ -10,6 +10,47 @@
       rel="stylesheet"
       href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700;900&display=swap"
     />
+    <!-- Load Firebase App and Firestore SDKs as modules -->
+    <script type="module">
+      // Import the required Firebase modules
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js";
+      import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js";
+
+      // Your Firebase configuration
+      const firebaseConfig = {
+        apiKey: "AIzaSyBY2EBA0KnOYZDjxCwSHBMGcLaFjG6IL4o",
+        authDomain: "greenify-e91f0.firebaseapp.com",
+        projectId: "greenify-e91f0",
+        storageBucket: "greenify-e91f0.appspot.com",
+        messagingSenderId: "995349170683",
+        appId: "1:995349170683:web:10bc48311fbf4a2710235e",
+        measurementId: "G-1FP8G4JTGR"
+      };
+      // Initialize Firebase
+      const app = initializeApp(firebaseConfig);
+
+      // Initialize Firestore
+      const db = getFirestore(app);
+
+      // Function to save email
+      window.saveEmail = async function() {
+        const emailInput = document.getElementById('emailInput').value; // Get the value of the input field
+
+        if (emailInput) {
+          try {
+            // Save the email to Firestore
+            await addDoc(collection(db, 'Email'), {
+              email: emailInput
+            });
+            console.log("Email successfully saved!");
+          } catch (error) {
+            console.error("Error saving email: ", error);
+          }
+        } else {
+          console.log("Email input is empty!");
+        }
+      };
+    </script>
   </head>
   <body>
     <div class="error">
@@ -73,7 +114,8 @@
             </p>
           </div>
           <div class="enter-your-email">Enter your email address:</div>
-          <input class="form-content-child"></input>
+          <input type="email" class="form-content-child" id="emailInput">
+          <button id="submitButton" onclick="saveEmail()">Submit</button>
         </div>
       </section>
       <footer class="background34">
@@ -231,15 +273,10 @@
         </div>
       </footer>
     </div>
-
     <script>
-      var admin = require("firebase-admin");
-
-      var serviceAccount = require("greenify-e91f0-firebase-adminsdk-vbpi4-d025a9220d.json");
-
-      admin.initializeApp({
-        credential: admin.credential.cert(serviceAccount)
-      });
+    
+      // Add event listener to button
+      document.getElementById('submitButton').addEventListener('click', saveEmail);
       var component2Container = document.getElementById("component2Container");
       if (component2Container) {
         component2Container.addEventListener("click", function () {

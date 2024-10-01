@@ -1,17 +1,29 @@
 {
   "name": "greenify",
   "version": "1.0.0",
-  "description": "",
+  "description": "Note: Please ensure you have installed <code><a href=\"https://nodejs.org/en/download/\">nodejs</a></code>",
   "scripts": {
     "start": "parcel ./*.html ",
     "build": "parcel build ./*.html  --dist-dir ./build"
   },
-  "author": "",
+  "author": "Ignacio Leal Sanchez",
   "license": "ISC",
   "devDependencies": {
     "parcel": "^2.7.0"
   },
   "dependencies": {
-    "firebase": "^10.14.0"
-  }
+    "firebase": "^10.14.0",
+    "firebase-admin": "^12.6.0"
+  },
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "Greenify"
+  },
+  "keywords": [
+    "Green",
+    "Invest",
+    "Energy",
+    "Renuevable"
+  ]
 }

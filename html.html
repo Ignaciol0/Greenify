@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Email Submission</title>
+
+    <!-- Load Firebase App and Firestore SDKs as modules -->
+    <script type="module">
+      // Import the required Firebase modules
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js";
+      import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js";
+
+      // Your Firebase configuration
+      const firebaseConfig = {
+        apiKey: "AIzaSyBY2EBA0KnOYZDjxCwSHBMGcLaFjG6IL4o",
+        authDomain: "greenify-e91f0.firebaseapp.com",
+        projectId: "greenify-e91f0",
+        storageBucket: "greenify-e91f0.appspot.com",
+        messagingSenderId: "995349170683",
+        appId: "1:995349170683:web:10bc48311fbf4a2710235e",
+        measurementId: "G-1FP8G4JTGR"
+      };
+      // Initialize Firebase
+      const app = initializeApp(firebaseConfig);
+
+      // Initialize Firestore
+      const db = getFirestore(app);
+
+      // Function to save email
+      window.saveEmail = async function() {
+        const emailInput = document.getElementById('emailInput').value; // Get the value of the input field
+
+        if (emailInput) {
+          try {
+            // Save the email to Firestore
+            await addDoc(collection(db, 'Email'), {
+              email: emailInput
+            });
+            console.log("Email successfully saved!");
+          } catch (error) {
+            console.error("Error saving email: ", error);
+          }
+        } else {
+          console.log("Email input is empty!");
+        }
+      };
+    </script>
+</head>
+<body>
+    <input type="email" class="form-content-child" id="emailInput" placeholder="Enter your email">
+    <button id="submitButton" onclick="saveEmail()">Submit</button>
+</body>
+</html>
