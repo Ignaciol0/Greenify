@@ -73,7 +73,7 @@
             </p>
           </div>
           <div class="enter-your-email">Enter your email address:</div>
-          <div class="form-content-child"></div>
+          <input class="form-content-child"></input>
         </div>
       </section>
       <footer class="background34">
@@ -233,6 +233,13 @@
     </div>
 
     <script>
+      var admin = require("firebase-admin");
+
+      var serviceAccount = require("greenify-e91f0-firebase-adminsdk-vbpi4-d025a9220d.json");
+
+      admin.initializeApp({
+        credential: admin.credential.cert(serviceAccount)
+      });
       var component2Container = document.getElementById("component2Container");
       if (component2Container) {
         component2Container.addEventListener("click", function () {

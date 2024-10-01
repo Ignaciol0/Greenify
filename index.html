@@ -1571,14 +1571,7 @@
     </div>
 
     <script>
-      var admin = require("firebase-admin");
-
-      var serviceAccount = require("greenify-e91f0-firebase-adminsdk-vbpi4-d025a9220d.json");
-
-      admin.initializeApp({
-        credential: admin.credential.cert(serviceAccount)
-      });
-
+      
       var background1 = document.getElementById("background1");
       if (background1) {
         background1.addEventListener("click", function (e) {
