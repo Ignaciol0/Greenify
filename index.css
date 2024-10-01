@@ -33,14 +33,13 @@
   align-items: center;
   justify-content: center;
 }
-.verticalborder {
-  flex: 0.6194;
+.verticalborder, .verticalborder1 {
+  flex: 1 1 250px;
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
-  justify-content: flex-start;
-  padding: var(--padding-8xs) 88px var(--padding-14xl-2);
+  align-items: center;
+  justify-content: center;
   gap: var(--gap-3xs);
   min-width: 253px;
   max-width: 100%;
@@ -89,7 +88,6 @@
   gap: var(--gap-xs-6);
 }
 .border-inner {
-  align-self: stretch;
   justify-content: flex-end;
   padding: 0 var(--padding-23xl) 0 var(--padding-24xl);
 }
@@ -105,21 +103,7 @@
   font-family: inherit;
   color: var(--wwwener2crowdcom-mine-shaft);
 }
-.border {
-  flex: 0.8291;
-  border-right: 2px solid var(--wwwener2crowdcom-eucalyptus);
-  border-left: 2px solid var(--wwwener2crowdcom-eucalyptus);
-  box-sizing: border-box;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  justify-content: flex-start;
-  padding: var(--padding-8xs) 60px 3.2px;
-  gap: var(--gap-3xs);
-  min-width: 253px;
-  max-width: 100%;
-  min-height: var(--height-120);
-}
+
 .h11,
 .m1 {
   position: relative;
@@ -143,7 +127,6 @@
   justify-content: center;
 }
 .border-child {
-  align-self: stretch;
   display: flex;
   flex-direction: row;
   align-items: flex-start;
@@ -160,15 +143,29 @@
   font-family: inherit;
   color: var(--wwwener2crowdcom-mine-shaft);
 }
+
 .border1 {
-  flex: 1;
+  flex: 1 1 250px;
   border-right: 2px solid var(--wwwener2crowdcom-eucalyptus);
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
-  align-items: flex-end;
-  justify-content: flex-start;
-  padding: var(--padding-8xs) var(--padding-19xl) var(--padding-14xl-2);
+  align-items: center;
+  justify-content: center;
+  gap: var(--gap-3xs);
+  min-width: 253px;
+  max-width: 100%;
+  min-height: var(--height-120);
+}
+.border {
+  flex: 1 1 250px;
+  border-right: 2px solid var(--wwwener2crowdcom-eucalyptus);
+  border-left: 2px solid var(--wwwener2crowdcom-eucalyptus);
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   gap: var(--gap-3xs);
   min-width: 253px;
   max-width: 100%;
@@ -215,7 +212,6 @@
   font-size: var(--wwwener2crowdcom-semantic-heading-4-size);
 }
 .k-parent {
-  align-self: stretch;
   flex-direction: row;
   gap: var(--gap-xs-6);
 }
@@ -229,8 +225,7 @@
   font-family: inherit;
 }
 .avoided-emissions-wrapper,
-.background,
-.verticalborder1 {
+.background {
   display: flex;
   align-items: flex-start;
   justify-content: flex-start;
@@ -242,20 +237,11 @@
   font-size: var(--wwwener2crowdcom-roboto-regular-21-size);
   color: var(--wwwener2crowdcom-mine-shaft);
 }
-.background,
-.verticalborder1 {
+.background{
   box-sizing: border-box;
   max-width: 100%;
 }
-.verticalborder1 {
-  flex: 0.7981;
-  flex-direction: column;
-  padding: var(--padding-8xs) var(--padding-45xl) var(--padding-14xl-2)
-    var(--padding-47xl);
-  gap: var(--gap-3xs);
-  min-width: 253px;
-  min-height: var(--height-120);
-}
+
 .background {
   margin-right: -1px;
   align-self: stretch;
@@ -3352,12 +3338,6 @@
     font-size: var(--font-size-mid);
     line-height: 24px;
   }
-  .border {
-    padding-left: var(--padding-xl);
-    padding-right: var(--padding-xl);
-    box-sizing: border-box;
-    flex: 1;
-  }
   .m1 {
     font-size: var(--font-size-4xl);
     line-height: 25px;
@@ -3614,6 +3594,40 @@
     background: linear-gradient(to bottom, var(--color-white-solid) 0%, rgba(255, 255, 255, 0) 100%);
   }
 }
+
+@media screen and (max-width: 1500px) {
+  .border1 {
+    border-right: none;  
+  }
+}
+
+@media screen and (max-width: 850px) {
+  .frame-container, .equity-heading, .frame-group {
+    display: block;
+  }
+  .lending-image-parent{
+    flex: none;
+  }
+  .frame-group {
+    display: flex;
+    justify-content: center;
+  }
+  .lending-image-parent, .frame-container{
+    flex: none;
+  }
+  .project-items {
+    justify-content: center;
+  }
+  .navigation {
+    height: 100px;
+  }
+  .dalle-2024-09-30-201437-a-parent {
+    position: absolute;
+    left: 50%; /* Move the element 50% from the left side */
+    transform: translateX(-50%);
+  }
+}
+
 
 body {
   overflow-x: hidden; /* Prevents horizontal scrolling */
