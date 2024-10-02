@@ -89,7 +89,6 @@
 }
 .border-inner {
   justify-content: flex-end;
-  padding: 0 var(--padding-23xl) 0 var(--padding-24xl);
 }
 .funds-collected-on {
   margin: 0;
@@ -131,7 +130,6 @@
   flex-direction: row;
   align-items: flex-start;
   justify-content: flex-end;
-  padding: 0 var(--padding-44xl) 0 var(--padding-46xl);
 }
 .funds-returned-to {
   margin: 0;

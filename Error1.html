@@ -13,9 +13,8 @@
     <!-- Load Firebase App and Firestore SDKs as modules -->
     <script type="module">
       // Import the required Firebase modules
-      import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js";
-      import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js";
-
+      import { initializeApp } from "./firebase-app.js";
+      import { getFirestore, collection, addDoc } from "./firebase-firestore.js";
       // Your Firebase configuration
       const firebaseConfig = {
         apiKey: "AIzaSyBY2EBA0KnOYZDjxCwSHBMGcLaFjG6IL4o",
@@ -28,14 +27,11 @@
       };
       // Initialize Firebase
       const app = initializeApp(firebaseConfig);
-
       // Initialize Firestore
       const db = getFirestore(app);
-
       // Function to save email
       window.saveEmail = async function() {
         const emailInput = document.getElementById('emailInput').value; // Get the value of the input field
-
         if (emailInput) {
           try {
             // Save the email to Firestore
@@ -51,6 +47,7 @@
         }
       };
     </script>
+    
   </head>
   <body>
     <div class="error">
@@ -115,7 +112,7 @@
           </div>
           <div class="enter-your-email">Enter your email address:</div>
           <input type="email" class="form-content-child" id="emailInput">
-          <button id="submitButton" onclick="saveEmail()">Submit</button>
+          <button id="SubmitEmail" >Submit</button>
         </div>
       </section>
       <footer class="background34">
@@ -274,9 +271,7 @@
       </footer>
     </div>
     <script>
-    
-      // Add event listener to button
-      document.getElementById('submitButton').addEventListener('click', saveEmail);
+      document.getElementById('SubmitEmail').addEventListener('click', saveEmail);
       var component2Container = document.getElementById("component2Container");
       if (component2Container) {
         component2Container.addEventListener("click", function () {
@@ -311,6 +306,18 @@
           window.open("https://www.youtube.com/channel/UCEurEsjliT2hVdb97UCWQWw");
         });
       }
+
+      var background1 = document.getElementsByClassName("dalle-2024-09-30-201437-a1-parent");
+
+      if (background1.length > 0) {
+        // Loop through all elements with the class name
+        for (var i = 0; i < background1.length; i++) {
+          background1[i].addEventListener("click", function () {
+            window.location.href = "./index.html";
+          });
+        }
+      }
+
       </script>
   </body>
 </html>
