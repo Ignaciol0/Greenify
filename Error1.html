@@ -112,7 +112,7 @@
           </div>
           <div class="enter-your-email">Enter your email address:</div>
           <input type="email" class="form-content-child" id="emailInput">
-          <button onclick="saveEmail" >Submit</button>
+          <button id = "SubmitEmail" >Submit</button>
         </div>
       </section>
       <footer class="background34">
@@ -271,6 +271,7 @@
       </footer>
     </div>
     <script>
+      document.getElementById("SubmitEmail").addEventListener('click',saveEmail)
       var component2Container = document.getElementById("component2Container");
       if (component2Container) {
         component2Container.addEventListener("click", function () {
