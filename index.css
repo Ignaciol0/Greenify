@@ -2767,7 +2767,6 @@
   color: inherit;
   text-decoration: none;
 }
-.container2,
 .tabpanel-list1 {
   display: flex;
   flex-direction: column;
@@ -2780,13 +2779,7 @@
   font-size: var(--wwwener2crowdcom-roboto-regular-15-size);
   color: var(--wwwener2crowdcom-dusty-gray);
 }
-.container2 {
-  padding: 0 var(--padding-mini);
-  box-sizing: border-box;
-  gap: var(--item-spacing-20-3);
-  min-height: var(--stroke-weight-1);
-  max-width: 100%;
-}
+
 .heading-53,
 .text11,
 .text12,
@@ -2842,10 +2835,8 @@
   z-index: 1;
 }
 .container-wrapper {
-  align-self: stretch;
   flex-direction: row;
   justify-content: flex-end;
-  margin-top: -188.3px;
 }
 .container-parent,
 .ener-crowd-container {

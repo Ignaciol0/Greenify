@@ -1450,32 +1450,7 @@
                 </div>
               </div>
             </div>
-            <div class="container-parent">
-              <div class="container2">
-                <b class="heading-51">LEGAL</b>
-                <div class="tabpanel-list1">
-                  <div class="i-building-raised-container">
-                    <div class="text">Greenify Services Agreement</div>
-                  </div>
-                  <div class="i-building-raised-container">
-                    <div class="text">Greenify Terms and Conditions</div>
-                  </div>
-                  <div class="i-building-raised-container">
-                    <a
-                      class="text8"
-                      href="https://www.ener2crowd.com/frontend/contents/contracts/lemonway.pdf"
-                      target="_blank"
-                      >LemonWay Terms and Conditions</a
-                    >
-                  </div>
-                  <div class="i-building-raised-container">
-                    <div class="text">Investor Education</div>
-                  </div>
-                  <div class="i-building-raised-container">
-                    <div class="text">Customer information</div>
-                  </div>
-                </div>
-              </div>
+            <div id="PrivacyPolicy" class="container-parent">
               <div class="container-wrapper">
                 <div class="container3">
                   <b class="heading-53">POLICY</b>
@@ -1593,7 +1568,13 @@
           window.location.href = "./Error1.html";
         });
       }
-      
+      var pp = document.getElementById("PrivacyPolicy");
+      if (pp) {
+        background2.addEventListener("click", function (e) {
+          window.location.href = "./PrivacyPolicy.html";
+        });
+      }
+
       var background2 = document.getElementById("background2");
       if (background2) {
         background2.addEventListener("click", function (e) {
@@ -1678,12 +1659,6 @@
         });
       }
       
-      var component2Container2 = document.getElementById("component2Container2");
-      if (component2Container2) {
-        component2Container2.addEventListener("click", function () {
-          window.open("https://www.instagram.com/ener2crowd/");
-        });
-      }
       
       var component2Container3 = document.getElementById("component2Container3");
       if (component2Container3) {
