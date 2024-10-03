@@ -31,21 +31,35 @@
       const db = getFirestore(app);
       // Function to save email
       window.saveEmail = async function() {
-        const emailInput = document.getElementById('emailInput').value; // Get the value of the input field
-        if (emailInput) {
-          try {
-            // Save the email to Firestore
-            await addDoc(collection(db, 'Email'), {
-              email: emailInput
-            });
-            console.log("Email successfully saved!");
-          } catch (error) {
-            console.error("Error saving email: ", error);
-          }
-        } else {
-          console.log("Email input is empty!");
+      const emailInputField = document.getElementById('emailInput');
+      const emailInput = emailInputField.value; // Get the value of the input field
+
+      // Check if the email input contains '@'
+      if (emailInput.includes('@')) {
+        try {
+          // Save the email to Firestore
+          await addDoc(collection(db, 'Email'), {
+            email: emailInput
+          });
+          console.log("Email successfully saved!");
+
+          // Clear the input field upon successful submission
+          emailInputField.value = '';
+          emailInputField.style.borderColor = ''; // Reset border color
+          emailInputField.placeholder = ''; // Clear placeholder
+        } catch (error) {
+          console.error("Error saving email: ", error);
         }
-      };
+      } else {
+        // Invalid email: Show a red placeholder and set border color
+        emailInputField.value = ''; // Clear the input
+        emailInputField.placeholder = "The email address must contain '@'";
+        emailInputField.style.borderColor = 'red'; // Set border color to red
+        emailInputField.style.color = 'red'; // Change text color to red for better visibility
+        console.log("Invalid email address. Must contain '@'.");
+      }
+    };
+
     </script>
     
   </head>
