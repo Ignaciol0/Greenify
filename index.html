@@ -1556,7 +1556,7 @@
             <a class="greenify">Greenify</a>
           </div>
         </div>
-        <div class="container7">
+        <div id = "container7" class="container7">
           <div class="list18">
             <div class="i-building-raised-container">
               <div class="component-818">
@@ -1581,7 +1581,12 @@
     </div>
 
     <script>
-      
+      var background0 = document.getElementById("container7");
+      if (background0) {
+        background0.addEventListener("click", function (e) {
+          window.location.href = "./Error1.html";
+        });
+      }
       var background1 = document.getElementById("background1");
       if (background1) {
         background1.addEventListener("click", function (e) {

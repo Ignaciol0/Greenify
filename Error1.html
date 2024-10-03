@@ -77,7 +77,7 @@
     <div class="error">
       <section class="navigation-wrapper">
         <header class="navigation1">
-          <div class="dalle-2024-09-30-201437-a-group">
+          <div id="logo" class="dalle-2024-09-30-201437-a-group">
             <img
               class="dalle-2024-09-30-201437-a1"
               loading="lazy"
@@ -330,17 +330,12 @@
         });
       }
 
-      var background1 = document.getElementsByClassName("dalle-2024-09-30-201437-a1-parent");
-
-      if (background1.length > 0) {
-        // Loop through all elements with the class name
-        for (var i = 0; i < background1.length; i++) {
-          background1[i].addEventListener("click", function () {
-            window.location.href = "./index.html";
-          });
-        }
+      var logo = document.getElementsById("logo");
+      if (logo) {
+        logo.addEventListener("click", function (e) {
+          window.location.href = "./index.html";
+        });
       }
-
       </script>
   </body>
 </html>
