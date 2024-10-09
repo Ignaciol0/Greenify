@@ -1,0 +1,1280 @@
+<head>
+  <!-- Load Firebase App and Firestore SDKs as modules -->
+  <script type="module">
+    // Import the required Firebase modules
+    import { initializeApp } from "./firebase-app.js";
+    import { getFirestore, collection, addDoc } from "./firebase-firestore.js";
+    // Your Firebase configuration
+    const firebaseConfig = {
+      apiKey: "AIzaSyBY2EBA0KnOYZDjxCwSHBMGcLaFjG6IL4o",
+      authDomain: "greenify-e91f0.firebaseapp.com",
+      projectId: "greenify-e91f0",
+      storageBucket: "greenify-e91f0.appspot.com",
+      messagingSenderId: "995349170683",
+      appId: "1:995349170683:web:10bc48311fbf4a2710235e",
+      measurementId: "G-1FP8G4JTGR"
+    };
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    // Initialize Firestore
+    const db = getFirestore(app);
+    // Function to save email
+
+    const emailInputField = document.querySelector('input[jsname="xvr5H"]');
+    const errorDiv = document.querySelector('div[jsname="hLoFd"]');
+    // Function to validate email or phone
+    function validateEmailOrPhone() {
+        const value = emailInputField.value.trim();
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        const phoneRegex = /^\d{10,15}$/;  // Assuming 10-15 digits for phone numbers
+
+        // Check if the value is a valid email or phone number
+        if (!emailRegex.test(value) && !phoneRegex.test(value)) {
+            errorDiv.classList.remove("hidden");  // Show error if neither is valid
+        } else {
+            errorDiv.classList.add("hidden");     // Hide error if valid
+        }
+    }
+
+    // Attach event listeners for 'blur' and 'input' events
+    emailInputField.addEventListener("blur", validateEmailOrPhone);
+    emailInputField.addEventListener("input", validateEmailOrPhone);
+
+    window.saveEmail = async function() {
+    const emailInputField = document.querySelector('input[jsname="xvr5H"]');
+    const errorDiv = document.querySelector('div[jsname="hLoFd"]');
+    const emailInput = emailInputField.value; // Get the value of the input field
+
+    // Check if the email input contains '@'
+    if (emailInput.includes('@')) {
+      try {
+        // Save the email to Firestore
+        await addDoc(collection(db, 'Email'), {
+          email: emailInput
+        });
+        console.log("Email successfully saved!");
+
+        // Clear the input field upon successful submission
+        emailInputField.value = '';
+        emailInputField.style.borderColor = ''; // Reset border color
+        emailInputField.placeholder = ''; // Clear placeholder
+      } catch (error) {
+        console.error("Error saving email: ", error);
+      }
+    } else {
+      // Invalid email: Show a red placeholder and set border color
+      emailInputField.value = ''; // Clear the input
+      emailInputField.placeholder = "The email address must contain '@'";
+      emailInputField.style.borderColor = 'red'; // Set border color to red
+      emailInputField.style.color = 'red'; // Change text color to red for better visibility
+      console.log("Invalid email address. Must contain '@'.");
+    }
+  };
+
+  </script>
+</head>
+<body>
+  <div class="YdN7Hc" id="single-ad-canvas">
+    <style
+      nonce="6kDbWyTkM89W6glWdb1cuw"
+      class="__web-inspector-hide-shortcut__"
+    >
+      html,
+      body,
+      h1 {
+        font-family: Roboto, Helvetica Neue, Arial, sans-serif;
+      }
+      body,
+      h1 {
+        font-size: small;
+      }
+      h3 {
+        font-weight: normal;
+        margin: 0;
+        padding: 0;
+        font-size: 20px;
+      }
+      body {
+        margin: 0 auto;
+        background: #fff;
+        color: #4d5156;
+        width: 380px;
+      }
+      a {
+        color: var(--JKqx2);
+        text-decoration: none;
+        -webkit-tap-highlight-color: rgba(0, 0, 0, 0.1);
+      }
+      a:visited {
+        color: #681da8;
+      }
+      cite,
+      cite a:link,
+      cite a:visited {
+        color: #3c4043;
+        font-style: normal;
+      }
+      button {
+        margin: 0;
+      }
+      ol li {
+        list-style: none;
+      }
+      ol,
+      ul,
+      li {
+        margin: 0;
+        padding: 0;
+      }
+      em {
+        font-weight: bold;
+        font-style: normal;
+      }
+      .nNzjpf-q7cFZ-vnv8ic em,
+      .cg9Tke-KZWGte-ezkdbf-pTTvpb-lvvS4b em {
+        color: #3c4043;
+        font-weight: normal;
+      }
+      .nNzjpf-q7cFZ-vnv8ic a em {
+        color: inherit;
+      }</style
+    ><style
+      nonce="6kDbWyTkM89W6glWdb1cuw"
+      class="__web-inspector-hide-shortcut__"
+    >
+      .cS4Vcb-haAclf-ssDqbb {
+        margin-bottom: 12px;
+      }
+      .cS4Vcb-haAclf-Ndbtee {
+        margin-bottom: 20px;
+      }
+      .cS4Vcb-haAclf-RwzlCf {
+        margin-left: 20px;
+        margin-right: 20px;
+      }
+      .cS4Vcb-haAclf-eELLTe {
+        padding-left: 8px;
+      }
+      .cS4Vcb-haAclf-n1vQEd {
+        padding-right: 16px;
+      }
+      .cS4Vcb-haAclf-dPtEyb {
+        padding-bottom: 2px;
+        padding-top: 2px;
+      }
+      .TH3yf-DARUcf {
+        font-family: Roboto, Helvetica Neue, Arial, sans-serif;
+        font-size: 14px;
+      }
+      .TH3yf-WsjYwc {
+        background: var(--xhUGwc);
+        border-radius: 0px;
+        box-shadow: 0px 1px 4px 0px rgba(0, 0, 0, 0.2);
+        padding: 20px 17px 5px;
+        position: relative;
+        z-index: 1;
+      }
+      .TH3yf-ibnC6b {
+        margin-bottom: 20px;
+        position: relative;
+      }
+      .TH3yf-WsjYwc input,
+      .qYKCuf-VtOx3e {
+        border: 1px solid #dadce0;
+        border-radius: 6px;
+        box-sizing: border-box;
+        color: var(--COEmY);
+        font-size: 14px;
+        height: 36px;
+        margin-top: 6px;
+        padding: 10px 10px;
+        width: 100%;
+      }
+      .wlBqwf-cHYyed-fmcmS-hxXJme {
+        color: #bdc1c6;
+      }
+      .P8Z0Xc-cHYyed-J42Xof-hFsbo {
+        padding: 10px 10px;
+      }
+      .MjTLCc-V1ur5d {
+        color: var(--bbQxAb);
+        font-size: 18px;
+        line-height: 20px;
+        margin-block-start: auto;
+        margin-block-end: auto;
+        font-weight: normal;
+      }
+      .TH3yf-r4nke {
+        color: var(--bbQxAb);
+        font-size: 16px;
+        font-weight: normal;
+        line-height: 24px;
+        margin-top: 10px;
+      }
+      .TH3yf-ij8cu {
+        color: var(--bbQxAb);
+        margin-top: 16px;
+      }
+      .TH3yf-WsjYwc label {
+        color: var(--IXoxUe);
+        display: block;
+        font-size: 12px;
+        line-height: 16px;
+        padding-left: 10px;
+        white-space: normal;
+      }
+      label.mw2f8d-fmcmS-Pj12W {
+        text-transform: none;
+      }
+      .rR7B4e-AznF2e-ij8cu {
+        color: var(--IXoxUe);
+        font-size: 16px;
+        line-height: 24px;
+        margin-left: 17px;
+        margin-right: 17px;
+      }
+      .In90Be-LgbsSe-haAclf {
+        background: var(--xhUGwc);
+        bottom: 0;
+        left: 0;
+        position: fixed;
+        right: 0;
+        z-index: bottom_button_z_index;
+      }
+      .TH3yf-HiaYvf {
+        display: block;
+        height: auto;
+        max-width: 1197px;
+        width: 100%;
+        position: fixed;
+        top: 54px;
+        z-index: background_z_index;
+      }
+      .BUoSr-Bz112c {
+        color: var(--IXoxUe);
+        height: 20px;
+        position: absolute;
+        right: 9px;
+        top: 6px;
+        width: 20px;
+      }
+      .WEga8d-Bz112c {
+        color: var(--IXoxUe);
+        position: absolute;
+        right: 14px;
+        top: 6px;
+      }
+      .MjTLCc-V1ur5d-J42Xof-dd7qz-kZ1n7c-haAclf {
+        position: relative;
+      }
+      .LC4igd-kZ1n7c-Bz112c {
+        color: var(--rrJJUc);
+        top: 6px;
+        margin-right: 6px;
+      }
+      .LC4igd-kZ1n7c-haAclf {
+        height: 20px;
+        position: absolute;
+        right: 7px;
+        bottom: 6px;
+      }
+      .LC4igd-kZ1n7c-LgbsSe {
+        border: 1px solid var(--mXZkqc);
+        border-radius: 36px;
+        margin-bottom: 60px;
+      }
+      .LC4igd-kZ1n7c-LgbsSe-fmcmS {
+        color: var(--bbQxAb);
+        font-size: 12px;
+        line-height: 24px;
+      }
+      .E8moT-fmcmS-J42Xof-Bz112c {
+        position: relative;
+      }
+      .z0jp9d-LgbsSe {
+        display: block;
+        font-size: 12px;
+        height: 36px;
+        line-height: 36px;
+      }
+      @media screen and (min-width: 481px) {
+        .TH3yf-DARUcf {
+          font-size: 16px;
+        }
+        .z0jp9d-d7Lfxd {
+          font-size: 14px;
+        }
+      }
+      .GOxXH-LkdAo {
+        display: block;
+        margin-top: 98px;
+      }
+      .B6WOCc-VCichb {
+        color: #34a853;
+        fill: #34a853;
+      }
+      .B6WOCc-eizL8e {
+        display: block;
+        font-size: 20px;
+      }
+      .u6nGFe-fmcmS {
+        font-size: 15px;
+        line-height: 20px;
+        margin-right: 40px;
+        margin-left: 40px;
+      }
+      .pjFcJf-Ne3sFf {
+        color: #d93025;
+        display: none;
+        font-size: 12px;
+        white-space: normal;
+      }
+      .exxfDc-j4gsHd-Tswv1b {
+        color: var(--IXoxUe);
+        font-size: 12px;
+        white-space: normal;
+      }
+      .Heap7c-fmcmS {
+        position: relative;
+        left: 4px;
+        padding-left: 5px;
+        padding-right: 5px;
+      }
+      .zsrnbc-vqc7Je-hSRGPd {
+        margin-top: -8px;
+        margin-bottom: -8px;
+        white-space: nowrap;
+      }
+      .eMGLBc-LS81yb {
+        overflow: hidden;
+      }
+      .PNQDgd-hSRGPd {
+        margin-top: -8px;
+        margin-bottom: -8px;
+        white-space: nowrap;
+      }
+      .Dc7exf-dHwMxe-uMX1Ee-LgbsSe-Bz112c {
+        color: var(--rrJJUc);
+        margin-right: 6px;
+      }
+      .Dc7exf-dHwMxe-uMX1Ee-LgbsSe-fmcmS {
+        color: var(--bbQxAb);
+        font-size: 12px;
+        line-height: 20px;
+      }
+      .Dc7exf-dHwMxe-uMX1Ee-LgbsSe {
+        border: 1px solid var(--mXZkqc);
+        border-radius: 36px;
+        display: none;
+        margin-bottom: 60px;
+      }
+      .eF8ow-ti6hGc-oHT5Xd-dHwMxe-uMX1Ee-LgbsSe {
+        display: inline-flex;
+      }
+      .z0jp9d-d7Lfxd {
+        color: var(--IXoxUe);
+        font-size: 12px;
+        line-height: 18px;
+      }
+      .z0jp9d-d7Lfxd-r4nke {
+        color: var(--IXoxUe);
+        font-size: 11px;
+        font-weight: normal;
+        line-height: 16px;
+        margin-block-start: 1em;
+        margin-block-end: 1em;
+      }
+      .rR7B4e-AznF2e-r4nke {
+        color: var(--IXoxUe);
+        font-size: 16px;
+        font-weight: 600;
+        margin-left: 17px;
+        margin-right: 17px;
+      }
+      .Uuwpwe-MPu53c-fmcmS {
+        color: var(--bbQxAb);
+        font-weight: 400;
+        letter-spacing: 0.2px;
+        margin-top: -20px;
+        margin-bottom: -20px;
+        position: absolute;
+      }
+      .Uuwpwe-MPu53c-u0pjoe {
+        color: #d93025;
+        display: none;
+      }
+      .O1HZQe-NBmHq-ORHb {
+        align-items: center;
+        background-color: #e8f0fe;
+        border-radius: 6px;
+        display: flex;
+        padding-left: 5px;
+        position: relative;
+      }
+      .O1HZQe-NBmHq-fmcmS {
+        color: var(--bbQxAb);
+        flex: 2 2 auto;
+      }
+      .O1HZQe-LgbsSe {
+        color: var(--rrJJUc);
+        cursor: pointer;
+        font-size: 14px;
+        font-weight: 500;
+        padding: 10px;
+      }
+      .c2jnod-NBmHq-ORHb {
+        align-items: center;
+        border: 1px solid #dadce0;
+        border-radius: 6px;
+        cursor: pointer;
+        display: flex;
+        padding-right: 10px;
+        padding-left: 5px;
+        position: relative;
+      }
+      .c2jnod-NBmHq-fmcmS {
+        align-items: center;
+        flex: 2 2 auto;
+        font-weight: normal;
+        padding: 5px 10px;
+      }
+      .LUKdHe-Bz112c {
+        color: var(--TMYS9);
+        height: 24px;
+        width: 48px;
+      }
+      .iVzHRe-Bz112c {
+        color: #bdc1c6;
+        cursor: pointer;
+        height: 14px;
+        min-width: 14px;
+        padding: 17px;
+        width: 14px;
+      }
+      .gG1VFf-J42Xof-h9d3hd-Bz112c-haAclf {
+        position: relative;
+      }
+      .Q5aErb-AznF2e {
+        margin-bottom: 64px;
+        overflow-y: auto;
+      }
+      .piucne-O1htCb {
+        background: var(--xhUGwc);
+        padding: 10px;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+      }
+      .piucne-O1htCb[disabled] {
+        opacity: 0.3;
+      }
+      .piucne-O1htCb-hFsbo-Bz112c {
+        color: var(--IXoxUe);
+        position: absolute;
+        right: 14px;
+        top: 28px;
+      }
+      .piucne-O1htCb-hFsbo-Bz112c[disabled] {
+        color: #f8f9fa;
+      }
+      .qYKCuf-SfQLQb-DyVDA-Q4BLdf {
+        color: var(--bbQxAb);
+        display: table-cell;
+        font-size: 14px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 20px;
+        margin: 5px;
+        padding-left: 10px;
+        word-break: break-word;
+      }
+      .LpurQ-Tswv1b-b0t70b {
+        display: flex;
+        flex-direction: row;
+        height: 32px;
+        justify-content: space-between;
+        padding: 16px 16px 8px;
+      }
+      .oKXFYe-fmcmS {
+        align-items: center;
+        display: flex;
+        gap: 14px;
+        height: 30px;
+      }
+      .MjTLCc-V1ur5d-Tswv1b-b0t70b {
+        color: var(--COEmY);
+        font-size: 14px;
+        font-style: normal;
+        font-weight: 500;
+        letter-spacing: 0.1px;
+        line-height: 20px;
+        margin: 0;
+      }
+      .JZjQFd {
+        color: var(--IXoxUe);
+        font-size: 12px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 16px;
+        margin: 0;
+        word-break: break-all;
+      }
+      .LC4igd-jSFuyb-LgbsSe {
+        align-items: center;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        padding: 0 16px;
+        width: 87px;
+      }
+      .iVzHRe-haAclf {
+        align-items: flex-start;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        padding: 12px 16px;
+      }
+      .iVzHRe-r4nke {
+        color: var(--COEmY);
+        font-size: 20px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 26px;
+        margin: 0;
+      }
+      .iVzHRe-ij8cu {
+        color: var(--IXoxUe);
+        font-size: 14px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 20px;
+        margin: 0;
+      }
+      .GfYg9c-Q4BLdf {
+        border: 1px solid var(--mXZkqc);
+        border-radius: 12px;
+        box-sizing: border-box;
+        margin: 8px 16px 12px;
+      }
+      .GfYg9c-Q4BLdf-b0t70b {
+        align-items: center;
+        display: flex;
+        flex-direction: row;
+        gap: 10px;
+        justify-content: center;
+        padding: 14px 15px;
+      }
+      .GfYg9c-Q4BLdf-b0t70b-MnozTc-ij8cu {
+        align-items: flex-start;
+        display: flex;
+        flex-direction: column;
+        padding: 0;
+      }
+      .GfYg9c-Q4BLdf-b0t70b-MnozTc {
+        color: var(--COEmY);
+        font-size: 14px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: 20px;
+        margin: 0;
+      }
+      .S4NQ1e-RWgCYc {
+        background: #dadce0;
+        height: 0.5px;
+        width: 100%;
+      }
+      .GfYg9c-Q4BLdf-Tswv1b {
+        align-items: center;
+        box-sizing: border-box;
+        display: flex;
+        flex-direction: row;
+        gap: 16px;
+        justify-content: space-between;
+        padding: 16px;
+      }
+      .GfYg9c-LgbsSe {
+        color: var(--rrJJUc);
+        height: 18px;
+        padding: 7px;
+        width: 18px;
+      }
+      .GfYg9c-LgbsSe-haAclf {
+        border: 1px solid var(--mXZkqc);
+        border-radius: 16px;
+        height: 32px;
+        width: 32px;
+      }
+      .CkUnhd-Jmejob-b0t70b {
+        align-items: center;
+        background: #f1f3f4;
+        display: flex;
+        flex-direction: row;
+        gap: 8px;
+        height: 44px;
+        justify-content: center;
+        padding: 0 16px;
+      }
+      .CkUnhd-OIZ4xc-b3rLgd-fmcmS {
+        color: var(--IXoxUe);
+        font-size: 12px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 16px;
+      }
+      .z0jp9d-I5GmGe-LgbsSe {
+        border-radius: 100px;
+        display: block;
+        font-size: 12px;
+        height: 40px;
+        line-height: 36px;
+        padding: 0;
+      }
+      .qYKCuf-haAclf {
+        display: table-row;
+      }
+      .NURHpf-haAclf {
+      }
+      .kvLBkb-haAclf {
+      }
+      .qYKCuf-jyrRxf {
+        display: table;
+        border-spacing: 5px;
+      }
+      .nzjIuc-Bz112c {
+        color: var(--rrJJUc);
+        margin-right: 10px;
+        margin-top: -2px;
+      }
+      .EhWxmf-Df2Jbe {
+        align-items: center;
+        display: flex;
+        font-size: 13.5px;
+        height: 20px;
+        margin-bottom: 11px;
+      }
+      .EhWxmf-Df2Jbe-fmcmS {
+        display: inline;
+      }
+      input.p0NWBb-Wxxdob,
+      g-dropdown-menu.p0NWBb-Wxxdob,
+      select.p0NWBb-Wxxdob {
+        border-color: #d93025;
+      }
+    </style>
+    <div
+      jscontroller="jWdTke"
+      data-afoef="false"
+      data-cti="0"
+      data-cu=""
+      data-gi=""
+      data-id="false"
+      data-async-context="ai:0;fi:0;fii:0;fm:"
+      jsdata="cJtXCe;_;1"
+      jsaction="lThgAc:tTA9Xb;rcuQ6b:Rayp9d;mMf61e:y31ice;m64Mye:qkZK3c;Yfizhb:EbsGUd"
+    >
+      <div jsname="vt3cld">
+        <div jsname="GutcZb" class="TH3yf-DARUcf" style="margin-top: 20px">
+          <style nonce="6kDbWyTkM89W6glWdb1cuw">
+            .cS4Vcb-haAclf-nz3nNc {
+              margin-top: 20px;
+              padding-bottom: 20px;
+            }
+          </style>
+          <form
+            jsname="FIIhbf"
+            class="TH3yf-WsjYwc cS4Vcb-haAclf-IDYPme cS4Vcb-haAclf-nz3nNc cS4Vcb-haAclf-bewbtd"
+          >
+            <div class="MjTLCc-V1ur5d-J42Xof-dd7qz-kZ1n7c-haAclf">
+              <h1 class="MjTLCc-V1ur5d" dir="ltr">Greenify</h1>
+            </div>
+            <p
+              class="TH3yf-ij8cu cS4Vcb-pGL6qe-ysgGef cS4Vcb-haAclf-FeQz0b cS4Vcb-haAclf-Ndbtee"
+              dir="ltr"
+            >
+              Give us your email or phone, and we'll share the latest renewable energy
+              projects with potential 10% returns. Join Greenify and invest in a
+              sustainable future!
+            </p>
+            <div
+              jsname="DgZNlc"
+              class="c2jnod-NBmHq-ORHb cS4Vcb-haAclf-VngVff cS4Vcb-haAclf-Ndbtee"
+              style="display: none"
+              role="button"
+              tabindex="0"
+              jsaction="U7sUCc"
+              data-ved="2ahUKEwjdmPXdkv6IAxXSgmgJHY2SA0IQ-c4HegQIABAA"
+            >
+              <style nonce="6kDbWyTkM89W6glWdb1cuw">
+                .TDcF6c-Bz112c {
+                  -webkit-box-flex: none;
+                  -moz-box-flex: none;
+                  -ms-flex: none;
+                  -webkit-flex: none;
+                  flex: none;
+                }</style
+              ><span class="TDcF6c-Bz112c"
+                ><img
+                  src="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
+                  data-iid="i2"
+                  data-deferred="1"
+                  height="19px"
+                  id="icn_i3"
+                  width="19px"
+                  alt=""
+                  data-atf="false"
+              /></span>
+              <div class="c2jnod-NBmHq-fmcmS">
+                Prefill with your profile info
+              </div>
+              <span
+                jsname="mf1VC"
+                class="iVzHRe-Bz112c vyDMJf-gXhOqb-Bz112c vyDMJf-gXhOqb-Tswv1b-Bz112c"
+                role="button"
+                tabindex="0"
+                jsaction="OfjlIb"
+                ><svg
+                  focusable="false"
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"
+                  ></path></svg
+              ></span>
+            </div>
+            <div jsname="lJAd4c" class="kvLBkb-haAclf">
+              <div class="TH3yf-ibnC6b ellip">
+                <label for="field0">Name</label
+                ><input
+                  jsname="V1ur5d"
+                  id="field0"
+                  maxlength="70"
+                  name="FULL_NAME"
+                  value=""
+                  autocomplete="name"
+                  type="text"
+                  jsaction="blur:GcinV; input:WzREm"
+                />
+                <div
+                  jsname="SV5aQb"
+                  class="pjFcJf-Ne3sFf Heap7c-fmcmS cS4Vcb-haAclf-VngVff cS4Vcb-haAclf-d4Agz"
+                  aria-atomic="true"
+                  role="alert"
+                >
+                  Name is not valid.
+                </div>
+              </div>
+              <div class="TH3yf-ibnC6b ellip">
+                <label for="field1">Email</label
+                ><input
+                  jsname="xvr5H"
+                  id="field1"
+                  maxlength="70"
+                  name="EMAIL"
+                  value=""
+                  autocomplete="email"
+                  type="email"
+                  jsaction="blur:MCJW8b; input:lmu9bd"
+                />
+                <div
+                  jsname="hLoFd"
+                  class="pjFcJf-Ne3sFf Heap7c-fmcmS cS4Vcb-haAclf-VngVff cS4Vcb-haAclf-d4Agz"
+                  aria-atomic="true"
+                  role="alert"
+                >
+                  Email address is not valid.
+                </div>
+              </div>
+              <div class="TH3yf-ibnC6b ellip">
+                <label for="field2">Phone Number</label>
+                <div class="gG1VFf-J42Xof-h9d3hd-Bz112c-haAclf">
+                  <input
+                    jsname="tOEJec"
+                    id="field2"
+                    maxlength="70"
+                    name="PHONE"
+                    type="text"
+                    value=""
+                    autocomplete="phone"
+                    jsaction="blur:isBVje; input:VFfrjc"
+                  />
+                </div>
+                <div
+                  jsname="M1RFNd"
+                  class="pjFcJf-Ne3sFf Heap7c-fmcmS cS4Vcb-haAclf-VngVff cS4Vcb-haAclf-d4Agz"
+                  aria-atomic="true"
+                  role="alert"
+                >
+                  phone number is not valid.
+                </div>
+              </div>
+              <div class="TH3yf-ibnC6b ellip">
+                <label for="field3">Country</label>
+                <div class="gG1VFf-J42Xof-h9d3hd-Bz112c-haAclf">
+                  <input
+                    jsname="OUyo8b"
+                    id="field3"
+                    maxlength="70"
+                    name="COUNTRY"
+                    type="text"
+                    value=""
+                    autocomplete="country"
+                    jsaction="blur:crCM8b; input:cu7ude"
+                  />
+                </div>
+                <div
+                  jsname="evifld"
+                  class="pjFcJf-Ne3sFf Heap7c-fmcmS cS4Vcb-haAclf-VngVff cS4Vcb-haAclf-d4Agz"
+                  aria-atomic="true"
+                  role="alert"
+                >
+                  Country is not valid.
+                </div>
+              </div>
+            </div>
+            <div class="NURHpf-haAclf">
+              <style nonce="6kDbWyTkM89W6glWdb1cuw">
+                .cS4Vcb-haAclf-dmEFmc {
+                  margin-bottom: 2px;
+                }
+              </style>
+              <h2 class="z0jp9d-d7Lfxd-r4nke cS4Vcb-haAclf-dmEFmc">
+                DISCLOSURE
+              </h2>
+              <p class="z0jp9d-d7Lfxd cS4Vcb-haAclf-hHVY7d">
+                By submitting, you agree to send your info to Greenify so they
+                can contact you about the above request. Greenify agrees to use
+                your info in accordance with their
+                <a
+                  class="zsrnbc-vqc7Je-hSRGPd cS4Vcb-haAclf-s0R5lc cS4Vcb-haAclf-e8E9hf cS4Vcb-haAclf-FeQz0b"
+                  href="https://greenify.live/PrivacyPolicy.html"
+                  ping="/url?sa=t&amp;source=web&amp;rct=j&amp;url=https://greenify.live/PrivacyPolicy.html&amp;ved=2ahUKEwjdmPXdkv6IAxXSgmgJHY2SA0IQj8QDegQIABAF&amp;opi=122715837"
+                  data-ved="2ahUKEwjdmPXdkv6IAxXSgmgJHY2SA0IQj8QDegQIABAF"
+                  >privacy policy</a
+                >
+                <a
+                  class="zsrnbc-vqc7Je-hSRGPd cS4Vcb-haAclf-s0R5lc cS4Vcb-haAclf-e8E9hf cS4Vcb-haAclf-FeQz0b"
+                  href="https://policies.google.com/privacy"
+                  ping="/url?sa=t&amp;source=web&amp;rct=j&amp;url=https://policies.google.com/privacy&amp;ved=2ahUKEwjdmPXdkv6IAxXSgmgJHY2SA0IQkMQDegQIABAG&amp;opi=122715837"
+                  data-ved="2ahUKEwjdmPXdkv6IAxXSgmgJHY2SA0IQkMQDegQIABAG"
+                  ></a
+                >
+              </p>
+              <div class="cS4Vcb-haAclf-c9Nld">
+                <g-button
+                id="myElement"
+                  jsname="q00WCc"
+                  class="z0jp9d-LgbsSe Wo8Mb-LgbsSe Ak3kIe"
+                  style=" display: block; height: 36px; line-height: 36px;"
+                  role="button"
+                  tabindex="0"
+                  jsaction="RIUG8b; keyup:RIUG8b; keydown:RIUG8b"
+                  data-ved="2ahUKEwjdmPXdkv6IAxXSgmgJHY2SA0IQwL8DegQIABAH"
+                  onclick="saveEmail()"
+                  ><style nonce="6kDbWyTkM89W6glWdb1cuw">
+                    .Wo8Mb-LgbsSe {
+                      -webkit-border-radius: 2px;
+                      -moz-border-radius: 2px;
+                      border-radius: 2px;
+                      border-radius: 2px;
+                      cursor: pointer;
+                      display: inline-block;
+                      font-size: 11px;
+                      font-weight: bold;
+                      height: 16px;
+                      line-height: 16px;
+                      min-width: 54px;
+                      padding: 6px 8px 5px;
+                      text-align: center;
+                      -webkit-transition: all 0.218s, visibility 0s;
+                      -o-transition: all 0.218s, visibility 0s;
+                      transition: all 0.218s, visibility 0s;
+                      -webkit-user-select: none;
+                      -moz-user-select: none;
+                      -ms-user-select: none;
+                    }
+                    .Wo8Mb-LgbsSe[disabled] {
+                      pointer-events: none;
+                      background-color: #f8f9fa;
+                      border-color: #f8f9fa;
+                      color: var(--IXoxUe);
+                    }</style
+                  ><style nonce="6kDbWyTkM89W6glWdb1cuw">
+                    .Ak3kIe {
+                      color: #fff;
+                      background-color: #1a73e8;
+                      border: 1px solid #1a73e8;
+                    }
+                    .Ak3kIe:hover {
+                      background-color: #1b66c9;
+                      border: 1px solid #1b66c9;
+                    }
+                    .Ak3kIe:focus {
+                      background-color: #1b5fb9;
+                      border: 1px solid #1b5fb9;
+                    }</style
+                  >SUBMIT</g-button
+                >
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+      <div jsname="M1Hjrb" style="display: none">
+        <style nonce="6kDbWyTkM89W6glWdb1cuw"></style>
+        <h2
+          class="rR7B4e-AznF2e-r4nke cS4Vcb-haAclf-fIHOlf cS4Vcb-haAclf-oxDq2d"
+          style="padding-top: 20px"
+        >
+          DISCLOSURE
+        </h2>
+        <p
+          class="rR7B4e-AznF2e-ij8cu cS4Vcb-haAclf-dPtEyb cS4Vcb-haAclf-qRfjob cS4Vcb-haAclf-ZkHaud"
+        >
+          By submitting, you agree to send your info to Greenify so they can
+          contact you about the above request. Greenify agrees to use your info
+          in accordance with their
+          <a
+            class="zsrnbc-vqc7Je-hSRGPd cS4Vcb-haAclf-s0R5lc cS4Vcb-haAclf-e8E9hf cS4Vcb-haAclf-FeQz0b"
+            href="https://greenify.live/PrivacyPolicy.html"
+            ping="/url?sa=t&amp;source=web&amp;rct=j&amp;url=https://greenify.live/PrivacyPolicy.html&amp;ved=2ahUKEwjdmPXdkv6IAxXSgmgJHY2SA0IQj8QDegQIABAJ&amp;opi=122715837"
+            data-ved="2ahUKEwjdmPXdkv6IAxXSgmgJHY2SA0IQj8QDegQIABAJ"
+            >privacy policy</a
+          >. 
+          <a
+            class="zsrnbc-vqc7Je-hSRGPd cS4Vcb-haAclf-s0R5lc cS4Vcb-haAclf-e8E9hf cS4Vcb-haAclf-FeQz0b"
+            href="https://policies.google.com/privacy"
+            ping="/url?sa=t&amp;source=web&amp;rct=j&amp;url=https://policies.google.com/privacy&amp;ved=2ahUKEwjdmPXdkv6IAxXSgmgJHY2SA0IQkMQDegQIABAK&amp;opi=122715837"
+            data-ved="2ahUKEwjdmPXdkv6IAxXSgmgJHY2SA0IQkMQDegQIABAK"
+            ></a
+          >
+        </p>
+        <div
+          class="In90Be-LgbsSe-haAclf cS4Vcb-haAclf-JQRx8 cS4Vcb-haAclf-n1vQEd cS4Vcb-haAclf-e4PHyd cS4Vcb-haAclf-fLXKJd"
+        >
+          <g-button
+            jsname="q00WCc"
+            class="z0jp9d-LgbsSe Wo8Mb-LgbsSe Ak3kIe"
+            style="
+              display: block;
+              height: 36px;
+              line-height: 36px;
+              font-size: -js-eval(sds_typescale.label_sm_size);
+            "
+            role="button"
+            tabindex="0"
+            jsaction="RIUG8b; keyup:RIUG8b; keydown:RIUG8b"
+            data-ved="2ahUKEwjdmPXdkv6IAxXSgmgJHY2SA0IQwL8DegQIABAL"
+            ><style nonce="6kDbWyTkM89W6glWdb1cuw">
+              .Wo8Mb-LgbsSe {
+                -webkit-border-radius: 2px;
+                -moz-border-radius: 2px;
+                border-radius: 2px;
+                border-radius: 2px;
+                cursor: pointer;
+                display: inline-block;
+                font-size: 11px;
+                font-weight: bold;
+                height: 16px;
+                line-height: 16px;
+                min-width: 54px;
+                padding: 6px 8px 5px;
+                text-align: center;
+                -webkit-transition: all 0.218s, visibility 0s;
+                -o-transition: all 0.218s, visibility 0s;
+                transition: all 0.218s, visibility 0s;
+                -webkit-user-select: none;
+                -moz-user-select: none;
+                -ms-user-select: none;
+              }
+              .Wo8Mb-LgbsSe[disabled] {
+                pointer-events: none;
+                background-color: #f8f9fa;
+                border-color: #f8f9fa;
+                color: var(--IXoxUe);
+              }</style
+            ><style nonce="6kDbWyTkM89W6glWdb1cuw">
+              .Ak3kIe {
+                color: #fff;
+                background-color: #1a73e8;
+                border: 1px solid #1a73e8;
+              }
+              .Ak3kIe:hover {
+                background-color: #1b66c9;
+                border: 1px solid #1b66c9;
+              }
+              .Ak3kIe:focus {
+                background-color: #1b5fb9;
+                border: 1px solid #1b5fb9;
+              }</style
+            >SUBMIT</g-button
+          >
+        </div>
+      </div>
+      <div
+        jsname="kZiWtd"
+        class="Q5aErb-AznF2e"
+        style="display: none"
+        data-ved="2ahUKEwjdmPXdkv6IAxXSgmgJHY2SA0IQvb8DegQIABAN"
+      >
+        <g-loading-icon
+          class="GOxXH-LkdAo cS4Vcb-haAclf-nu7uJf nNzjpf-twKXnc-D9rxme-Bz112c nNzjpf-twKXnc-nXXp7d cS4Vcb-pGL6qe-dMyTib"
+          style="height: 30px; min-width: 30px"
+          jsname="dqEw7d"
+          ><div class="nNzjpf-twKXnc-p9ks8e-haAclf nNzjpf-twKXnc-a3Uk7" style="height: 30px; width: 30px;"
+   aria-label="Loading..."
+   role="progressbar"
+>
+            <div
+              class="nNzjpf-twKXnc-iC8tnb-pbTTYe nNzjpf-twKXnc-p9ks8e-pbTTYe"
+            >
+              <div class="nNzjpf-twKXnc-bSTnVb-e9ayKc">
+                <div
+                  class="nNzjpf-twKXnc-ubLvn nNzjpf-twKXnc-bSTnVb nNzjpf-twKXnc-MD6n1b-LkdAo nNzjpf-twKXnc-tqBftc-LkdAo"
+                ></div>
+              </div>
+              <div class="nNzjpf-twKXnc-zdn1lb-TpMipd">
+                <div
+                  class="nNzjpf-twKXnc-ubLvn nNzjpf-twKXnc-bSTnVb nNzjpf-twKXnc-zdn1lb-LkdAo"
+                ></div>
+              </div>
+              <div class="nNzjpf-twKXnc-bSTnVb-e9ayKc">
+                <div
+                  class="nNzjpf-twKXnc-ubLvn nNzjpf-twKXnc-bSTnVb nNzjpf-twKXnc-MD6n1b-LkdAo nNzjpf-twKXnc-c8Ncz-LkdAo"
+                ></div>
+              </div>
+            </div>
+            <div
+              class="nNzjpf-twKXnc-ARP1Ff-pbTTYe nNzjpf-twKXnc-p9ks8e-pbTTYe"
+            >
+              <div class="nNzjpf-twKXnc-bSTnVb-e9ayKc">
+                <div
+                  class="nNzjpf-twKXnc-ubLvn nNzjpf-twKXnc-bSTnVb nNzjpf-twKXnc-MD6n1b-LkdAo nNzjpf-twKXnc-tqBftc-LkdAo"
+                ></div>
+              </div>
+              <div class="nNzjpf-twKXnc-zdn1lb-TpMipd">
+                <div
+                  class="nNzjpf-twKXnc-ubLvn nNzjpf-twKXnc-bSTnVb nNzjpf-twKXnc-zdn1lb-LkdAo"
+                ></div>
+              </div>
+              <div class="nNzjpf-twKXnc-bSTnVb-e9ayKc">
+                <div
+                  class="nNzjpf-twKXnc-ubLvn nNzjpf-twKXnc-bSTnVb nNzjpf-twKXnc-MD6n1b-LkdAo nNzjpf-twKXnc-c8Ncz-LkdAo"
+                ></div>
+              </div>
+            </div>
+            <div
+              class="nNzjpf-twKXnc-WSmqXe-pbTTYe nNzjpf-twKXnc-p9ks8e-pbTTYe"
+            >
+              <div class="nNzjpf-twKXnc-bSTnVb-e9ayKc">
+                <div
+                  class="nNzjpf-twKXnc-ubLvn nNzjpf-twKXnc-bSTnVb nNzjpf-twKXnc-MD6n1b-LkdAo nNzjpf-twKXnc-tqBftc-LkdAo"
+                ></div>
+              </div>
+              <div class="nNzjpf-twKXnc-zdn1lb-TpMipd">
+                <div
+                  class="nNzjpf-twKXnc-ubLvn nNzjpf-twKXnc-bSTnVb nNzjpf-twKXnc-zdn1lb-LkdAo"
+                ></div>
+              </div>
+              <div class="nNzjpf-twKXnc-bSTnVb-e9ayKc">
+                <div
+                  class="nNzjpf-twKXnc-ubLvn nNzjpf-twKXnc-bSTnVb nNzjpf-twKXnc-MD6n1b-LkdAo nNzjpf-twKXnc-c8Ncz-LkdAo"
+                ></div>
+              </div>
+            </div>
+            <div
+              class="nNzjpf-twKXnc-PJwptb-pbTTYe nNzjpf-twKXnc-p9ks8e-pbTTYe"
+            >
+              <div class="nNzjpf-twKXnc-bSTnVb-e9ayKc">
+                <div
+                  class="nNzjpf-twKXnc-ubLvn nNzjpf-twKXnc-bSTnVb nNzjpf-twKXnc-MD6n1b-LkdAo nNzjpf-twKXnc-tqBftc-LkdAo"
+                ></div>
+              </div>
+              <div class="nNzjpf-twKXnc-zdn1lb-TpMipd">
+                <div
+                  class="nNzjpf-twKXnc-ubLvn nNzjpf-twKXnc-bSTnVb nNzjpf-twKXnc-zdn1lb-LkdAo"
+                ></div>
+              </div>
+              <div class="nNzjpf-twKXnc-bSTnVb-e9ayKc">
+                <div
+                  class="nNzjpf-twKXnc-ubLvn nNzjpf-twKXnc-bSTnVb nNzjpf-twKXnc-MD6n1b-LkdAo nNzjpf-twKXnc-c8Ncz-LkdAo"
+                ></div>
+              </div>
+            </div></div
+        ></g-loading-icon>
+        <div
+          jsname="fx2yxf"
+          style="display: none"
+          data-ved="2ahUKEwjdmPXdkv6IAxXSgmgJHY2SA0IQ9dYDegQIABAP"
+        >
+          <style nonce="6kDbWyTkM89W6glWdb1cuw">
+            .nNzjpf-FzV1B-ezkdbf-y4mSse-EXejDe-NfGssd-LkdAo {
+              display: block;
+              margin-top: 98px;
+            }
+            .nNzjpf-FzV1B-ezkdbf-y4mSse-EXejDe-mbPW0b-VCichb {
+              color: #34a853;
+              fill: #34a853;
+            }</style
+          ><span
+            class="nNzjpf-FzV1B-ezkdbf-y4mSse-EXejDe-NfGssd-LkdAo cS4Vcb-haAclf-nu7uJf vyDMJf-gXhOqb-Bz112c vyDMJf-gXhOqb-u0pjoe-Bz112c"
+            style="height: 56px; line-height: 56px; width: 56px"
+            ><svg
+              focusable="false"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+            >
+              <path
+                d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"
+              ></path></svg></span
+          ><style nonce="6kDbWyTkM89W6glWdb1cuw">
+            .nNzjpf-FzV1B-ezkdbf-y4mSse-EXejDe-mbPW0b-u0pjoe-hSRGPd {
+              display: block;
+              font-size: 20px;
+            }</style
+          ><a
+            class="nNzjpf-FzV1B-ezkdbf-y4mSse-EXejDe-mbPW0b-u0pjoe-hSRGPd cS4Vcb-pGL6qe-qk1XBb cS4Vcb-pGL6qe-dMyTib"
+            href="javascript:void(0);"
+            jsaction="mtjHrb"
+            >Please try again.</a
+          >
+        </div>
+        <div style="display: none">
+          <style nonce="6kDbWyTkM89W6glWdb1cuw">
+            .nNzjpf-FzV1B-ezkdbf-y4mSse-EXejDe-NfGssd-LkdAo {
+              display: block;
+              margin-top: 98px;
+            }
+            .nNzjpf-FzV1B-ezkdbf-y4mSse-EXejDe-mbPW0b-VCichb {
+              color: #34a853;
+              fill: #34a853;
+            }</style
+          ><span
+            class="nNzjpf-FzV1B-ezkdbf-y4mSse-EXejDe-NfGssd-LkdAo nNzjpf-FzV1B-ezkdbf-y4mSse-EXejDe-mbPW0b-VCichb cS4Vcb-haAclf-nu7uJf vyDMJf-gXhOqb-Bz112c vyDMJf-gXhOqb-g6cJHd-LkdAo-i5vt6e-Bz112c"
+            style="height: 56px; line-height: 56px; width: 56px"
+            ><svg
+              focusable="false"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+            >
+              <path
+                d="M16.59 7.58L10 14.17l-3.59-3.58L5 12l5 5 8-8zM12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8z"
+              ></path></svg
+          ></span>
+        </div>
+        <div jsname="JljFff" class="Q5aErb-fmcmS-Q4BLdf" style="display: none">
+          <div class="TH3yf-iib5kc-Bz112c-Q4BLdf">
+            <label
+              jsname="j5CcQd"
+              class="B6WOCc-eizL8e B6WOCc-VCichb cS4Vcb-pGL6qe-dMyTib"
+              style="display: none"
+              >Thank you.</label
+            >
+          </div>
+          <p
+            jsname="RaKKp"
+            class="u6nGFe-fmcmS cS4Vcb-pGL6qe-dMyTib cS4Vcb-haAclf-ZkHaud cS4Vcb-haAclf-pos31"
+          >
+            We'll contact you soon.
+          </p>
+          Copy code
+<a class="In90Be-LgbsSe-haAclf cS4Vcb-haAclf-JQRx8 cS4Vcb-haAclf-n1vQEd cS4Vcb-haAclf-e4PHyd cS4Vcb-haAclf-fLXKJd"
+   href="#"
+   jsaction="trigger.GK8ajb">
+    <g-raised-button 
+        id="myButton"
+        style="display: block;height: 36px;line-height: 36px;" 
+        class="nNzjpf-c3KLCf cS4Vcb-pGL6qe-dMyTib nNzjpf-IMDSUc nNzjpf-eQKnj-fmcmS" 
+        role="button" 
+        tabindex="0">
+    <style nonce="6kDbWyTkM89W6glWdb1cuw">
+                g-raised-button {
+                  display: inline-block;
+                  margin: 0 4px;
+                  position: relative;
+                }
+                .nNzjpf-c3KLCf {
+                  -webkit-box-sizing: border-box;
+                  box-sizing: border-box;
+                  font-size: 14px;
+                  font-weight: 500;
+                  min-width: 88px;
+                  -webkit-transition: box-shadow 200ms
+                    cubic-bezier(0.4, 0, 0.2, 1);
+                  -o-transition: box-shadow 200ms cubic-bezier(0.4, 0, 0.2, 1);
+                  transition: box-shadow 200ms cubic-bezier(0.4, 0, 0.2, 1);
+                  -webkit-user-select: none;
+                  -moz-user-select: none;
+                  -ms-user-select: none;
+                  white-space: nowrap;
+                  text-transform: none;
+                  border: 1px solid var(--gS5jXb);
+                  border-radius: 6px;
+                  height: 36px;
+                }
+                .nNzjpf-c3KLCf::before {
+                  bottom: -7px;
+                  content: "";
+                  left: 0;
+                  position: absolute;
+                  right: 0;
+                  top: -7px;
+                }
+                .nNzjpf-c3KLCf:active {
+                  -webkit-box-shadow: 0 0 0 1px #dadce0;
+                  -moz-box-shadow: 0 0 0 1px #dadce0;
+                  box-shadow: 0 0 0 1px #dadce0;
+                  outline: none;
+                }
+                .nNzjpf-tHOIAf {
+                  border-radius: 8px;
+                  outline: none;
+                  line-height: 20px;
+                  padding: 7px 24px;
+                }
+                .nNzjpf-tHOIAf:focus {
+                  background: rgba(0, 0, 0, 0.1);
+                }
+                .nNzjpf-tHOIAf:active {
+                  background: rgba(0, 0, 0, 0.2);
+                }
+                .nNzjpf-c3KLCf:disabled,
+                .nNzjpf-c3KLCf[disabled]:not([disabled="false"]) {
+                  pointer-events: none;
+                  color: rgba(0, 0, 0, 0.26) !important;
+                  background: rgba(0, 0, 0, 0.12);
+                  -webkit-box-shadow: none;
+                  -moz-box-shadow: none;
+                  box-shadow: none;
+                }
+                .nNzjpf-c3KLCf:disabled .nNzjpf-tHOIAf,
+                .nNzjpf-c3KLCf[disabled]:not([disabled="false"])
+                  .nNzjpf-tHOIAf {
+                  background-color: transparent;
+                }
+                .nNzjpf-c3KLCf.nNzjpf-SYHLS-LgbsSe-Wrro6b-DKlKme-QFlW2
+                  .nNzjpf-tHOIAf {
+                  line-height: 20px;
+                  padding: 7px 16px;
+                }</style
+              ><style nonce="6kDbWyTkM89W6glWdb1cuw">
+                .nNzjpf-eQKnj-fmcmS {
+                  color: #fff;
+                }
+              </style>
+              <div class="nNzjpf-tHOIAf">
+              </div></g-raised-button
+            ></a
+          >
+        </div>
+      </div>
+    </div>
+  </div>
+  <script>
+    const element = document.getElementById("myElement");
+    element.style.fontSize = sds_typescale.label_sm_size + 'px'; // or whatever unit is needed
+    const button = document.getElementById("myButton");
+    // Assuming sds_typescale.label_sm_size is a value you want to set for font-size
+    button.style.fontSize = sds_typescale.label_sm_size + 'px'; 
+  </script>
+</body>
