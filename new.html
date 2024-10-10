@@ -38,10 +38,6 @@
           }
     }
 
-    // Attach event listeners for 'blur' and 'input' events
-    emailInputField.addEventListener("blur", validateEmailOrPhone);
-    emailInputField.addEventListener("input", validateEmailOrPhone);
-
     window.saveEmail = async function() {
     const emailInputField = document.querySelector('input[jsname="xvr5H"]');
     const errorDiv = document.querySelector('div[jsname="hLoFd"]');
