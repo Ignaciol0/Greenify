@@ -44,7 +44,7 @@
     const emailInput = emailInputField.value; // Get the value of the input field
 
     // Check if the email input contains '@'
-    if (emailInput.includes('@')) {
+    if (validateEmailOrPhone()) {
       try {
         // Save the email to Firestore
         await addDoc(collection(db, 'Email'), {
@@ -60,35 +60,9 @@
         console.error("Error saving email: ", error);
       }
     } else {
-      // Invalid email: Show a red placeholder and set border color
-      emailInputField.value = ''; // Clear the input
-      emailInputField.placeholder = "The email address must contain '@'";
-      emailInputField.style.borderColor = 'red'; // Set border color to red
-      emailInputField.style.color = 'red'; // Change text color to red for better visibility
-      console.log("Invalid email address. Must contain '@'.");
+      console.log("Not valid email or phone")
     }
     };
-    
-    function toggleFields() {
-        console.log("Toggled")
-        const countryInput = document.getElementById('country');
-        const emirateSelect = document.getElementById('emirate');
-        const customInput = document.getElementById('custom-input');
-        const selectedCountry = countryInput.value;
-
-        if (selectedCountry === "United Arab Emirates") {
-            emirateSelect.classList.remove('hidden'); // Show emirate select
-            customInput.classList.add('hidden');      // Hide custom input
-        } else {
-            emirateSelect.classList.add('hidden');    // Hide emirate select
-            customInput.classList.remove('hidden');    // Show custom input
-        }
-    }
-  
-    window.addEventListener('DOMContentLoaded', () => {
-    const countryInput = document.getElementById('country');
-    countryInput.addEventListener('change', toggleFields)})
-
   </script>
 </head>
 <body>
