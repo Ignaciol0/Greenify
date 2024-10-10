@@ -54,12 +54,12 @@
 
         // Clear the input field upon successful submission
         emailInputField.value = '';
-        emailInputField.style.borderColor = ''; // Reset border color
-        emailInputField.placeholder = ''; // Clear placeholder
       } catch (error) {
         console.error("Error saving email: ", error);
       }
     } else {
+      // Invalid email: Show a red placeholder and set border color
+      emailInputField.value = ''; // Clear the input
       console.log("Not valid email or phone")
     }
     };
@@ -317,7 +317,6 @@
       }
       .pjFcJf-Ne3sFf {
         color: #d93025;
-        display: none;
         font-size: 12px;
         white-space: normal;
       }
@@ -763,7 +762,7 @@
                 />
                 <div
                   jsname="SV5aQb"
-                  class="pjFcJf-Ne3sFf Heap7c-fmcmS cS4Vcb-haAclf-VngVff cS4Vcb-haAclf-d4Agz"
+                  class="pjFcJf-Ne3sFf Heap7c-fmcmS cS4Vcb-haAclf-VngVff cS4Vcb-haAclf-d4Agz hidden"
                   aria-atomic="true"
                   role="alert"
                 >
@@ -784,7 +783,7 @@
                 />
                 <div
                   jsname="hLoFd"
-                  class="pjFcJf-Ne3sFf Heap7c-fmcmS cS4Vcb-haAclf-VngVff cS4Vcb-haAclf-d4Agz"
+                  class="pjFcJf-Ne3sFf Heap7c-fmcmS cS4Vcb-haAclf-VngVff cS4Vcb-haAclf-d4Agz hidden"
                   aria-atomic="true"
                   role="alert"
                 >
@@ -1041,14 +1040,6 @@
                       <option value="Zimbabwe">Zimbabwe</option>
                   </select>
                 </div>
-                <div
-                  jsname="M1RFNd"
-                  class="pjFcJf-Ne3sFf Heap7c-fmcmS cS4Vcb-haAclf-VngVff cS4Vcb-haAclf-d4Agz"
-                  aria-atomic="true"
-                  role="alert"
-                >
-                  Country is not valid.
-                </div>
               </div>
               <div class="TH3yf-ibnC6b ellip">
                 <label for="field3">Emirate/Province</label>
@@ -1075,14 +1066,6 @@
                     <option value="Umm Al-Quwain">Umm Al-Quwain</option>
                     <option value="Not in UAE">Not in UAE</option>
                   </select>
-                </div>
-                <div
-                  jsname="evifld"
-                  class="pjFcJf-Ne3sFf Heap7c-fmcmS cS4Vcb-haAclf-VngVff cS4Vcb-haAclf-d4Agz"
-                  aria-atomic="true"
-                  role="alert"
-                >
-                  Emirate is not valid.
                 </div>
               </div>
             </div>
@@ -1530,8 +1513,5 @@
     const button = document.getElementById("myButton");
     // Assuming sds_typescale.label_sm_size is a value you want to set for font-size
     button.style.fontSize = sds_typescale.label_sm_size + 'px'; 
-    
-    const countryInput = document.getElementById('country');
-    countryInput.addEventListener("change",toggleFields)
   </script>
 </body>
