@@ -31,9 +31,11 @@
         // Check if the value is a valid email or phone number
         if (!emailRegex.test(value) && !phoneRegex.test(value)) {
             errorDiv.classList.remove("hidden");  // Show error if neither is valid
+            return false
         } else {
             errorDiv.classList.add("hidden");     // Hide error if valid
-        }
+            return true
+          }
     }
 
     // Attach event listeners for 'blur' and 'input' events
@@ -69,9 +71,8 @@
       emailInputField.style.color = 'red'; // Change text color to red for better visibility
       console.log("Invalid email address. Must contain '@'.");
     }
+    }
     
-    const countryInput = document.getElementById('country');
-    countryInput.addEventListener("change",toggleFields)
     function toggleFields() {
         console.log("Toggled")
         const countryInput = document.getElementById('country');
@@ -87,7 +88,10 @@
             customInput.classList.remove('hidden');    // Show custom input
         }
     }
-  };
+  
+    window.addEventListener('DOMContentLoaded', () => {
+    const countryInput = document.getElementById('country');
+    countryInput.addEventListener('change', toggleFields)})
 
   </script>
 </head>
@@ -1099,6 +1103,7 @@
                     <option value="Ras Al Khaimah">Ras Al Khaimah</option>
                     <option value="Sharjah">Sharjah</option>
                     <option value="Umm Al-Quwain">Umm Al-Quwain</option>
+                    <option value="Not in UAE">Not in UAE</option>
                   </select>
                 </div>
                 <div
@@ -1555,5 +1560,8 @@
     const button = document.getElementById("myButton");
     // Assuming sds_typescale.label_sm_size is a value you want to set for font-size
     button.style.fontSize = sds_typescale.label_sm_size + 'px'; 
+    
+    const countryInput = document.getElementById('country');
+    countryInput.addEventListener("change",toggleFields)
   </script>
 </body>
