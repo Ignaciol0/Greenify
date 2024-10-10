@@ -44,10 +44,10 @@
       try {
         // Save the email to Firestore
         await addDoc(collection(db, 'userInfo'), {
-        name: name,
-        emailOrPhone: emailOrPhone,
-        country: country,
-        emirate: country === "United Arab Emirates" ? emirate : null // Only save emirate if UAE is selected
+        name: nameInputField.value,
+        emailOrPhone: emailInputField.value,
+        country: country.value,
+        emirate: country.value === "United Arab Emirates" ? emirate.value : null // Only save emirate if UAE is selected
       });
         console.log("Email successfully saved!");
 
