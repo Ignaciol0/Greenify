@@ -4,16 +4,9 @@
     // Import the required Firebase modules
     import { initializeApp } from "./firebase-app.js";
     import { getFirestore, collection, addDoc } from "./firebase-firestore.js";
+    import { firebaseConfig } from './firebaseConfig.js';
     // Your Firebase configuration
-    const firebaseConfig = {
-      apiKey: "AIzaSyBY2EBA0KnOYZDjxCwSHBMGcLaFjG6IL4o",
-      authDomain: "greenify-e91f0.firebaseapp.com",
-      projectId: "greenify-e91f0",
-      storageBucket: "greenify-e91f0.appspot.com",
-      messagingSenderId: "995349170683",
-      appId: "1:995349170683:web:10bc48311fbf4a2710235e",
-      measurementId: "G-1FP8G4JTGR"
-    };
+    
     // Initialize Firebase
     const app = initializeApp(firebaseConfig);
     // Initialize Firestore
@@ -40,6 +33,9 @@
 
     window.saveEmail = async function() {
     const emailInputField = document.querySelector('input[jsname="xvr5H"]');
+    const nameInputField = document.querySelector('input[jsname="V1ur5d"]');
+    const country = document.getElementById("country");
+    const emirate = document.getElementById("emirate");
     const errorDiv = document.querySelector('div[jsname="hLoFd"]');
     const emailInput = emailInputField.value; // Get the value of the input field
 
@@ -47,19 +43,25 @@
     if (validateEmailOrPhone()) {
       try {
         // Save the email to Firestore
-        await addDoc(collection(db, 'Email'), {
-          email: emailInput
-        });
+        await addDoc(collection(db, 'userInfo'), {
+        name: name,
+        emailOrPhone: emailOrPhone,
+        country: country,
+        emirate: country === "United Arab Emirates" ? emirate : null // Only save emirate if UAE is selected
+      });
         console.log("Email successfully saved!");
 
         // Clear the input field upon successful submission
         emailInputField.value = '';
+        nameInputField.value = '';
+        
       } catch (error) {
         console.error("Error saving email: ", error);
       }
     } else {
       // Invalid email: Show a red placeholder and set border color
       emailInputField.value = ''; // Clear the input
+      nameInputField.value = '';  
       console.log("Not valid email or phone")
     }
     };
