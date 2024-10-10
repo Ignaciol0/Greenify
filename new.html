@@ -26,7 +26,7 @@
         const errorDiv = document.querySelector('div[jsname="hLoFd"]');
         const value = emailInputField.value.trim();
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        const phoneRegex = /^\d{10,15}$/;  // Assuming 10-15 digits for phone numbers
+        const phoneRegex = /^\+?\d{9,15}$/;  // Assuming 10-15 digits for phone numbers
 
         // Check if the value is a valid email or phone number
         if (!emailRegex.test(value) && !phoneRegex.test(value)) {
