@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Greenify - Crowdfunding for Eco-Friendly Projects</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;900&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f4f4f0;
+            color: #2c3e50;
+        }
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 50;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem;
+            background-color: rgba(255, 255, 255, 0.9);
+        }
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+        .logo img {
+            width: 40px;
+            height: 40px;
+        }
+        .logo span {
+            margin-left: 0.5rem;
+            font-size: 1.25rem;
+            font-weight: 900;
+        }
+        .menu-btn {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+        .menu {
+            position: fixed;
+            top: 0;
+            right: -250px;
+            width: 250px;
+            height: 100%;
+            background-color: #f4f4f0;
+            transition: right 0.3s ease-in-out;
+            padding: 2rem;
+        }
+        .menu.open {
+            right: 0;
+        }
+        .menu h2 {
+            margin-bottom: 1rem;
+        }
+        .menu a {
+            display: block;
+            margin-bottom: 1rem;
+            color: #2c3e50;
+            text-decoration: none;
+        }
+        .hero {
+            position: relative;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.1);
+            z-index: 5;
+        }
+        .hero video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 101%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .hero-content {
+            position: relative;
+            z-index: 10;
+            text-align: center;
+            color: white;
+            padding: 1rem;
+        }
+        .hero-content h1 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(111, 111, 111, 0.8);
+        }
+        .btn {
+            display: inline-block;
+            padding: 0.75rem 1.5rem;
+            background-color: #4a6741;
+            color: white;
+            text-decoration: none;
+            border-radius: 0.25rem;
+            transition: background-color 0.3s ease;
+        }
+        .btn:hover {
+            background-color: #3a5331;
+        }
+        .projects {
+            padding: 3rem 1rem;
+        }
+        .projects h2 {
+            font-size: 1.875rem;
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        .project-card {
+            background-color: white;
+            border-radius: 0.5rem;
+            overflow: hidden;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .project-image {
+            height: 12rem;
+            background-size: cover;
+            background-position: center;
+        }
+        .project-content {
+            padding: 1rem;
+        }
+        .project-title {
+            font-size: 1.25rem;
+            margin-bottom: 0.5rem;
+        }
+        .project-description {
+            color: #64748b;
+            margin-bottom: 1rem;
+        }
+        .project-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+        .stat-item p:first-child {
+            font-weight: bold;
+        }
+        .stat-item p:last-child {
+            color: #64748b;
+            font-size: 0.875rem;
+        }
+        footer {
+            background-color: #4a6741;
+            color: white;
+            text-align: center;
+            padding: 1.5rem 1rem;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <img src="logo.png" alt="Greenify Logo">
+            <span>Greenify</span>
+        </div>
+        <button class="menu-btn" aria-label="Toggle menu">☰</button>
+    </header>
+
+    <nav class="menu">
+        <h2>Menu</h2>
+        <a href="#projects">Projects</a>
+        <a href="#about">About Us</a>
+        <a href="#contact">Contact</a>
+    </nav>
+
+    <section class="hero">
+        <div class="hero-overlay"></div>
+        <video autoplay loop muted playsinline>
+            <source src="public/eco-video-background.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+        <div class="hero-content">
+            <h1>Crowdfunding for Green Projects in Europe</h1>
+            <a href="#invest" class="btn">Invest Now</a>
+        </div>
+    </section>
+
+    <section class="projects" id="projects">
+        <h2>Featured Projects</h2>
+        <div class="project-card">
+            <div class="project-image" style="background-image: url('public/background1@3x.png');"></div>
+            <div class="project-content">
+                <h3 class="project-title">Solar Panel Initiative</h3>
+                <p class="project-description">Install solar panels on public buildings in Spain</p>
+                <div class="project-stats">
+                    <div class="stat-item">
+                        <p>7.2%</p>
+                        <p>Annual Return</p>
+                    </div>
+                    <div class="stat-item">
+                        <p>3 years</p>
+                        <p>Duration</p>
+                    </div>
+                    <div class="stat-item">
+                        <p>987</p>
+                        <p>Investors</p>
+                    </div>
+                </div>
+                <a href="#info" class="btn">Get Info</a>
+            </div>
+        </div>
+        <div class="project-card">
+            <div class="project-image" style="background-image: url('public/background2@3x.png');"></div>
+            <div class="project-content">
+                <h3 class="project-title">Eco-Friendly Gym</h3>
+                <p class="project-description">Support the construction of a sustainable gym using renewable energy</p>
+                <div class="project-stats">
+                    <div class="stat-item">
+                        <p>8.5%</p>
+                        <p>Annual Return</p>
+                    </div>
+                    <div class="stat-item">
+                        <p>5 years</p>
+                        <p>Duration</p>
+                    </div>
+                    <div class="stat-item">
+                        <p>1234</p>
+                        <p>Investors</p>
+                    </div>
+                </div>
+                <a href="#info" class="btn">Get Info</a>
+            </div>
+        </div>
+        <div class="project-card">
+            <div class="project-image" style="background-image: url('public/background4@3x.png');"></div>
+            <div class="project-content">
+                <h3 class="project-title">Wind Farm Expansion</h3>
+                <p class="project-description">Expand an existing wind farm in northern Europe</p>
+                <div class="project-stats">
+                    <div class="stat-item">
+                        <p>6.8%</p>
+                        <p>Annual Return</p>
+                    </div>
+                    <div class="stat-item">
+                        <p>4 years</p>
+                        <p>Duration</p>
+                    </div>
+                    <div class="stat-item">
+                        <p>765</p>
+                        <p>Investors</p>
+                    </div>
+                </div>
+                <a href="#info" class="btn">Get Info</a>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2024 Greenify. All rights reserved.</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const menuBtn = document.querySelector('.menu-btn');
+            const menu = document.querySelector('.menu');
+
+            menuBtn.addEventListener('click', function() {
+                menu.classList.toggle('open');
+            });
+        });
+    </script>
+</body>
+</html>

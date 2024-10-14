@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Greenify - Crowdfunding for Eco-Friendly Projects</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;900&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f4f4f0;
+            color: #2c3e50;
+        }
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 50;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem;
+            background-color: rgba(255, 255, 255, 0.9);
+        }
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+        .logo img {
+            width: 40px;
+            height: 40px;
+        }
+        .logo span {
+            margin-left: 0.5rem;
+            font-size: 1.25rem;
+            font-weight: 900;
+        }
+        .menu-btn {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+        .menu {
+            position: fixed;
+            top: 0;
+            right: -250px;
+            width: 250px;
+            height: 100%;
+            background-color: #f4f4f0;
+            transition: right 0.3s ease-in-out;
+            padding: 2rem;
+            z-index: 100;
+        }
+        .menu.open {
+            right: 0;
+        }
+        .menu h2 {
+            margin-bottom: 1rem;
+        }
+        .menu a {
+            display: block;
+            margin-bottom: 1rem;
+            color: #2c3e50;
+            text-decoration: none;
+        }
+        .hero {
+            position: relative;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+        .hero video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.4);
+        }
+        .hero-content {
+            position: relative;
+            z-index: 10;
+            text-align: center;
+            color: white;
+            padding: 1rem;
+        }
+        .hero-content h1 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+        }
+        .btn {
+            display: inline-block;
+            padding: 0.75rem 1.5rem;
+            background-color: #4a6741;
+            color: white;
+            text-decoration: none;
+            border-radius: 0.25rem;
+            transition: background-color 0.3s ease;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+        }
+        .btn:hover {
+            background-color: #3a5331;
+        }
+        .projects {
+            padding: 3rem 1rem;
+            overflow: hidden;
+        }
+        .projects h2 {
+            font-size: 1.875rem;
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        .project-slider {
+            display: flex;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+        }
+        .project-slider::-webkit-scrollbar {
+            display: none;
+        }
+        .project-card {
+            flex: 0 0 300px;
+            background-color: white;
+            border-radius: 0.5rem;
+            overflow: hidden;
+            margin-right: 1rem;
+            scroll-snap-align: start;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .project-image {
+            height: 12rem;
+            background-size: cover;
+            background-position: center;
+        }
+        .project-content {
+            padding: 1rem;
+        }
+        .project-title {
+            font-size: 1.25rem;
+            margin-bottom: 0.5rem;
+        }
+        .project-description {
+            color: #64748b;
+            margin-bottom: 1rem;
+        }
+        .project-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+        .stat-item p:first-child {
+            font-weight: bold;
+        }
+        .stat-item p:last-child {
+            color: #64748b;
+            font-size: 0.875rem;
+        }
+        footer {
+            background-color: #4a6741;
+            color: white;
+            text-align: center;
+            padding: 1.5rem 1rem;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <img src="public/logo.png" alt="Greenify Logo">
+            <span>Greenify</span>
+        </div>
+        <button class="menu-btn" aria-label="Toggle menu">☰</button>
+    </header>
+
+    <nav class="menu">
+        <h2>Menu</h2>
+        <a href="#projects">Projects</a>
+        <a href="#about">About Us</a>
+        <a href="#contact">Contact</a>
+    </nav>
+
+    <section class="hero">
+        <video autoplay loop muted playsinline>
+            <source src="public/eco-video-background.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <h1>Crowdfunding for Green Projects in Europe</h1>
+            <a href="#invest" class="btn">Invest Now</a>
+        </div>
+    </section>
+
+    <section class="projects" id="projects">
+        <h2>Featured Projects</h2>
+        <div class="project-slider" id="projectSlider">
+            <!-- Project cards will be dynamically inserted here -->
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2024 Greenify. All rights reserved.</p>
+    </footer>
+
+    <!-- Firebase App (the core Firebase SDK) is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <!-- Add Firebase products that you want to use -->
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+
+    <script>
+        // Your web app's Firebase configuration
+        const firebaseConfig = {
+        apiKey: "AIzaSyBY2EBA0KnOYZDjxCwSHBMGcLaFjG6IL4o",
+        authDomain: "greenify-e91f0.firebaseapp.com",
+        projectId: "greenify-e91f0",
+        storageBucket: "greenify-e91f0.appspot.com",
+        messagingSenderId: "995349170683",
+        appId: "1:995349170683:web:10bc48311fbf4a2710235e",
+        measurementId: "G-1FP8G4JTGR"
+      };
+
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+
+        // Get a reference to the database service
+        const db = firebase.firestore();
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const menuBtn = document.querySelector('.menu-btn');
+            const menu = document.querySelector('.menu');
+            const projectSlider = document.getElementById('projectSlider');
+
+            menuBtn.addEventListener('click', function() {
+                menu.classList.toggle('open');
+            });
+
+            // Fetch projects from Firebase
+            db.collection("projects").get().then((querySnapshot) => {
+                querySnapshot.forEach((doc) => {
+                    const project = doc.data();
+                    const card = createProjectCard(project);
+                    projectSlider.appendChild(card);
+                });
+                setupInfiniteScroll();
+            }).catch((error) => {
+                console.log("Error getting documents: ", error);
+            });
+
+            function createProjectCard(project) {
+                const card = document.createElement('div');
+                card.className = 'project-card';
+                card.innerHTML = `
+                    <div class="project-image" style="background-image: url('public/${project.imageUrl}');"></div>
+                    <div class="project-content">
+                        <h3 class="project-title">${project.title}</h3>
+                        <p class="project-description">${project.description}</p>
+                        <div class="project-stats">
+                            <div class="stat-item">
+                                <p>${project.annualReturn}</p>
+                                <p>Annual Return</p>
+                            </div>
+                            <div class="stat-item">
+                                <p>${project.duration}</p>
+                                <p>Duration</p>
+                            </div>
+                            <div class="stat-item">
+                                <p>${project.investors}</p>
+                                <p>Investors</p>
+                            </div>
+                        </div>
+                        <a href="#info" class="btn">Get Info</a>
+                    </div>
+                `;
+                return card;
+            }
+
+            function setupInfiniteScroll() {
+                const slider = document.querySelector('.project-slider');
+                let isDown = false;
+                let startX;
+                let scrollLeft;
+
+                slider.addEventListener('mousedown', (e) => {
+                    isDown = true;
+                    slider.classList.add('active');
+                    startX = e.pageX - slider.offsetLeft;
+                    scrollLeft = slider.scrollLeft;
+                });
+
+                slider.addEventListener('mouseleave', () => {
+                    isDown = false;
+                    slider.classList.remove('active');
+                });
+
+                slider.addEventListener('mouseup', () => {
+                    isDown = false;
+                    slider.classList.remove('active');
+                });
+
+                slider.addEventListener('mousemove', (e) => {
+                    if (!isDown) return;
+                    e.preventDefault();
+                    const x = e.pageX - slider.offsetLeft;
+                    const walk = (x - startX) * 3;
+                    slider.scrollLeft = scrollLeft - walk;
+                });
+
+                // Infinite scroll effect
+                slider.addEventListener('scroll', () => {
+                    if (slider.scrollLeft + slider.clientWidth >= slider.scrollWidth - 1) {
+                        const firstCard = slider.firstElementChild;
+                        slider.appendChild(firstCard.cloneNode(true));
+                        slider.scrollLeft -= firstCard.offsetWidth;
+                    } else if (slider.scrollLeft <= 0) {
+                        const lastCard = slider.lastElementChild;
+                        slider.prepend(lastCard.cloneNode(true));
+                        slider.scrollLeft += lastCard.offsetWidth;
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+</html>

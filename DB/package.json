@@ -1,0 +1,17 @@
+{
+  "name": "firebase-insert-project",
+  "version": "1.0.0",
+  "main": "fetchAndUpload.js",
+  "type": "module",
+  "scripts": {
+    "start": "node fetchAndUpload.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "firebase": "^9.23.0",
+    "node-fetch": "^2.7.0"
+  },
+  "description": ""
+}
