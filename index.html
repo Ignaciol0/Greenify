@@ -183,22 +183,28 @@
             text-align: center;
             padding: 1.5rem 1rem;
         }
+        .logo-link {
+            text-decoration: none;
+            color: inherit;
+        }
     </style>
 </head>
 <body>
     <header>
-        <div class="logo">
-            <img src="public/logo.png" alt="Greenify Logo">
-            <span>Greenify</span>
-        </div>
+        <a href="index.html" class="logo-link">
+            <div class="logo">
+                <img src="public/logo.png" alt="Greenify Logo">
+                <span>Greenify</span>
+            </div>
+        </a>
         <button class="menu-btn" aria-label="Toggle menu">☰</button>
     </header>
 
     <nav class="menu">
         <h2>Menu</h2>
-        <a href="#projects">Projects</a>
-        <a href="#about">About Us</a>
-        <a href="#contact">Contact</a>
+        <a href="projects.html">All Projects</a>
+        <a href="./privacy-policy.html">Privacy Policy</a>
+        <a href="./contact.html">Contact</a>
     </nav>
 
     <section class="hero">
@@ -246,6 +252,14 @@
 
         // Get a reference to the database service
         const db = firebase.firestore();
+        const investButtons = document.querySelectorAll('.invest-btn');
+            investButtons.forEach(button => {
+                button.addEventListener('click', function(e) {
+                    const projectTitle = this.getAttribute('data-project-title');
+                    localStorage.setItem('selectedProject', projectTitle);
+                    console.log('Project title set:', projectTitle); // For debugging
+                });
+            });
 
         document.addEventListener('DOMContentLoaded', function() {
             const menuBtn = document.querySelector('.menu-btn');
@@ -264,6 +278,7 @@
                     projectSlider.appendChild(card);
                 });
                 setupInfiniteScroll();
+                setupInvestButtonListeners();
             }).catch((error) => {
                 console.log("Error getting documents: ", error);
             });
@@ -290,7 +305,9 @@
                                 <p>Investors</p>
                             </div>
                         </div>
-                        <a href="#info" class="btn">Get Info</a>
+                        <div style="text-align: center;">
+                            <a href="form.html" class="btn invest-btn" data-project-title="${project.title}">Get Info</a>
+                        </div>
                     </div>
                 `;
                 return card;
@@ -339,6 +356,22 @@
                         slider.scrollLeft += lastCard.offsetWidth;
                     }
                 });
+            }
+
+            function setupInvestButtonListeners() {
+                const investButtons = document.querySelectorAll('.invest-btn');
+                investButtons.forEach(button => {
+                    button.addEventListener('click', function(e) {
+                        const projectTitle = this.getAttribute('data-project-title');
+                        localStorage.setItem('selectedProject', projectTitle);
+                        console.log('Project title set:', projectTitle); // For debugging
+                    });
+                });
+            }
+
+            function setProjectTitle(title) {
+                localStorage.setItem('selectedProject', title);
+                console.log('Project title set:', title); // For debugging
             }
         });
     </script>

@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Greenify - Eco-Friendly Projects</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;900&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f4f4f0;
+            color: #2c3e50;
+            line-height: 1.6;
+        }
+        header {
+            background-color: #4a674140;
+            padding: 1rem;
+        }
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+        .logo img {
+            width: 40px;
+            height: 40px;
+            margin-right: 0.5rem;
+        }
+        .logo span {
+            font-size: 1.25rem;
+            font-weight: 900;
+        }
+        .logo-link {
+            text-decoration: none;
+            color: inherit;
+        }
+        main {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 2rem;
+        }
+        h1 {
+            color: #4a6741;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+        .projects {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        .project-card {
+            background-color: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .project-image {
+            height: 200px;
+            background-size: cover;
+            background-position: center;
+        }
+        .project-content {
+            padding: 1rem;
+        }
+        .project-title {
+            font-size: 1.25rem;
+            margin-bottom: 0.5rem;
+            color: #4a6741;
+        }
+        .project-description {
+            color: #64748b;
+            margin-bottom: 1rem;
+        }
+        .project-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+        .stat-item p:first-child {
+            font-weight: bold;
+        }
+        .stat-item p:last-child {
+            color: #64748b;
+            font-size: 0.875rem;
+        }
+        .btn {
+            display: inline-block;
+            background-color: #4a6741;
+            color: white;
+            padding: 0.75rem 1.5rem;
+            text-decoration: none;
+            border-radius: 4px;
+            font-size: 1rem;
+            transition: background-color 0.3s ease;
+        }
+        .btn:hover {
+            background-color: #3a5331;
+        }
+        footer {
+            background-color: #4a6741;
+            color: white;
+            text-align: center;
+            padding: 1rem;
+            margin-top: 2rem;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <a href="index.html" class="logo-link">
+            <div class="logo">
+                <img src="public/logo.png" alt="Greenify Logo">
+                <span>Greenify</span>
+            </div>
+        </a>
+    </header>
+
+    <main>
+        <h1>Eco-Friendly Projects</h1>
+        <div class="projects" id="projectsContainer">
+            <!-- Projects will be dynamically inserted here -->
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Greenify. All rights reserved.</p>
+    </footer>
+
+    <!-- Firebase App (the core Firebase SDK) is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <!-- Add Firebase products that you want to use -->
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+
+    <script>
+        // Your web app's Firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyBY2EBA0KnOYZDjxCwSHBMGcLaFjG6IL4o",
+            authDomain: "greenify-e91f0.firebaseapp.com",
+            projectId: "greenify-e91f0",
+            storageBucket: "greenify-e91f0.appspot.com",
+            messagingSenderId: "995349170683",
+            appId: "1:995349170683:web:10bc48311fbf4a2710235e",
+            measurementId: "G-1FP8G4JTGR"
+        };
+
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+
+        // Get a reference to the database service
+        const db = firebase.firestore();
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const projectsContainer = document.getElementById('projectsContainer');
+
+            // Fetch projects from Firebase
+            db.collection("projects").get().then((querySnapshot) => {
+                querySnapshot.forEach((doc) => {
+                    const project = doc.data();
+                    const card = createProjectCard(project);
+                    projectsContainer.appendChild(card);
+                });
+                setupInvestButtonListeners();
+            }).catch((error) => {
+                console.log("Error getting documents: ", error);
+            });
+
+            function createProjectCard(project) {
+                const card = document.createElement('div');
+                card.className = 'project-card';
+                card.innerHTML = `
+                    <div class="project-image" style="background-image: url('public/${project.imageUrl}');"></div>
+                    <div class="project-content">
+                        <h3 class="project-title">${project.title}</h3>
+                        <p class="project-description">${project.description}</p>
+                        <div class="project-stats">
+                            <div class="stat-item">
+                                <p>${project.annualReturn}</p>
+                                <p>Annual Return</p>
+                            </div>
+                            <div class="stat-item">
+                                <p>${project.duration}</p>
+                                <p>Duration</p>
+                            </div>
+                            <div class="stat-item">
+                                <p>${project.investors}</p>
+                                <p>Investors</p>
+                            </div>
+                        </div>
+                        <div style="text-align: center;">
+                            <a href="form.html" class="btn invest-btn" data-project-title="${project.title}">Get Info</a>
+                        </div>
+                    </div>
+                `;
+                return card;
+            }
+
+            function setupInvestButtonListeners() {
+                const investButtons = document.querySelectorAll('.invest-btn');
+                investButtons.forEach(button => {
+                    button.addEventListener('click', function(e) {
+                        const projectTitle = this.getAttribute('data-project-title');
+                        localStorage.setItem('selectedProject', projectTitle);
+                        console.log('Project title set:', projectTitle); // For debugging
+                    });
+                });
+            }
+        });
+    </script>
+</body>
+</html>
