@@ -113,7 +113,7 @@
 </head>
 <body>
     <header>
-        <a href="index.html" class="logo-link">
+        <a href="index.html" class="logo-link" id="logoLink">
             <div class="logo">
                 <img src="public/logo.png" alt="Greenify Logo">
                 <span>Greenify</span>
@@ -162,8 +162,30 @@
         // Get a reference to the database service
         const db = firebase.firestore();
 
+        function addIntentToLinks() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const intent = urlParams.get('intent');
+            if (intent) {
+                document.querySelectorAll('a').forEach(link => {
+                    if (link.href.includes(window.location.origin)) {
+                        const url = new URL(link.href);
+                        url.searchParams.set('intent', intent);
+                        link.href = url.toString();
+                    }
+                });
+            }
+        }
+
         document.addEventListener('DOMContentLoaded', function() {
             const projectsContainer = document.getElementById('projectsContainer');
+
+            // Update logo link
+            const logoLink = document.getElementById('logoLink');
+            const urlParams = new URLSearchParams(window.location.search);
+            const intent = urlParams.get('intent');
+            if (intent) {
+                logoLink.href = `index.html?intent=${intent}`;
+            }
 
             // Fetch projects from Firebase
             db.collection("projects").get().then((querySnapshot) => {
@@ -173,11 +195,16 @@
                     projectsContainer.appendChild(card);
                 });
                 setupInvestButtonListeners();
+                addIntentToLinks();
             }).catch((error) => {
                 console.log("Error getting documents: ", error);
             });
 
             function createProjectCard(project) {
+                const urlParams = new URLSearchParams(window.location.search);
+                const intent = urlParams.get('intent');
+                const formUrl = intent ? `form.html?intent=${intent}` : 'form.html';
+
                 const card = document.createElement('div');
                 card.className = 'project-card';
                 card.innerHTML = `
@@ -200,7 +227,7 @@
                             </div>
                         </div>
                         <div style="text-align: center;">
-                            <a href="form.html" class="btn invest-btn" data-project-title="${project.title}">Get Info</a>
+                            <a href="${formUrl}" class="btn invest-btn" data-project-title="${project.title}">Get Info</a>
                         </div>
                     </div>
                 `;

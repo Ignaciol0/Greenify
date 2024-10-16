@@ -108,7 +108,7 @@
 </head>
 <body>
     <header>
-        <a href="index.html" class="logo-link">
+        <a href="index.html" class="logo-link" id="logoLink">
             <div class="logo">
                 <img src="public/logo.png" alt="Greenify Logo">
                 <span>Greenify</span>
@@ -339,6 +339,9 @@
             form.addEventListener('submit', function(e) {
                 e.preventDefault();
                 
+                const urlParams = new URLSearchParams(window.location.search);
+                const intent = urlParams.get('intent');
+                
                 const formData = {
                     name: form.name.value,
                     country: countrySelect.value,
@@ -346,7 +349,8 @@
                     contactType: contactTypeSelect.value,
                     email: emailInput.value || null,
                     phone: contactTypeSelect.value === 'phone' ? phonePrefixSelect.value + phoneInput.value : null,
-                    projectTitle: projectTitleInput.value
+                    projectTitle: projectTitleInput.value,
+                    intent: intent || 'default'  // Include the intent in the form data
                 };
 
                 console.log('Form data to be submitted:', formData);
@@ -396,6 +400,33 @@
                     });
                 });
             });
+        });
+    </script>
+    <script>
+        function addIntentToLinks() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const intent = urlParams.get('intent');
+            if (intent) {
+                document.querySelectorAll('a').forEach(link => {
+                    if (link.href.includes(window.location.origin)) {
+                        const url = new URL(link.href);
+                        url.searchParams.set('intent', intent);
+                        link.href = url.toString();
+                    }
+                });
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            addIntentToLinks();
+            
+            // Update logo link
+            const logoLink = document.getElementById('logoLink');
+            const urlParams = new URLSearchParams(window.location.search);
+            const intent = urlParams.get('intent');
+            if (intent) {
+                logoLink.href = `index.html?intent=${intent}`;
+            }
         });
     </script>
 </body>

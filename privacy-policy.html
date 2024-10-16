@@ -82,7 +82,7 @@
 </head>
 <body>
     <header>
-        <a href="index.html" class="logo-link">
+        <a href="index.html" class="logo-link" id="logoLink">
             <div class="logo">
                 <img src="public/logo.png" alt="Greenify Logo">
                 <span>Greenify</span>
@@ -144,5 +144,33 @@
     <footer>
         <p>&copy; 2024 Greenify. All rights reserved.</p>
     </footer>
+
+    <script>
+        function addIntentToLinks() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const intent = urlParams.get('intent');
+            if (intent) {
+                document.querySelectorAll('a').forEach(link => {
+                    if (link.href.includes(window.location.origin)) {
+                        const url = new URL(link.href);
+                        url.searchParams.set('intent', intent);
+                        link.href = url.toString();
+                    }
+                });
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            addIntentToLinks();
+            
+            // Update logo link
+            const logoLink = document.getElementById('logoLink');
+            const urlParams = new URLSearchParams(window.location.search);
+            const intent = urlParams.get('intent');
+            if (intent) {
+                logoLink.href = `index.html?intent=${intent}`;
+            }
+        });
+    </script>
 </body>
 </html>

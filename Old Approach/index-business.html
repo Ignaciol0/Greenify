@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Greenify - Crowdfunding for Eco-Friendly Projects</title>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;900&display=swap" rel="stylesheet">
+    <title>Greenify - Smart Investments in Sustainable Energy</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700;900&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -13,8 +13,8 @@
         }
         body {
             font-family: 'Roboto', sans-serif;
-            background-color: #f4f4f0;
-            color: #2c3e50;
+            line-height: 1.6;
+            color: #333;
         }
         header {
             position: fixed;
@@ -71,74 +71,59 @@
             text-decoration: none;
         }
         .hero {
-            position: relative;
             height: 100vh;
+            background-image: url('public/investor-hero-image.webp');
+            background-size: cover;
+            background-position: center;
             display: flex;
             align-items: center;
             justify-content: center;
-            overflow: hidden;
+            text-align: center;
+            color: white;
+            position: relative;
         }
-        .background-image {
+        .hero::before {
+            content: '';
             position: absolute;
             top: 0;
             left: 0;
-            width: 100%;
-            height: 100%;
-            background-image: url('public/eco-background.jpg');
-            background-size: cover;
-            background-position: center;
-        }
-        .hero video {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 101%;
-            height: 100%;
-            object-fit: cover;
-            opacity: 0;
-            transition: opacity 0.5s ease-in-out;
-        }
-        .hero-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.4);
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0,0,0,0.5);
         }
         .hero-content {
             position: relative;
             z-index: 10;
-            text-align: center;
-            color: white;
-            padding: 1rem;
+            padding: 0 1rem;
         }
-        .hero-content h1 {
+        .hero h1 {
             font-size: 2rem;
             margin-bottom: 1rem;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+        }
+        .hero p {
+            font-size: 1rem;
+            margin-bottom: 1.5rem;
         }
         .btn {
             display: inline-block;
-            padding: 0.75rem 1.5rem;
             background-color: #4a6741;
             color: white;
+            padding: 0.75rem 1.5rem;
             text-decoration: none;
             border-radius: 0.25rem;
+            font-weight: bold;
             transition: background-color 0.3s ease;
-            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
         }
         .btn:hover {
             background-color: #3a5331;
         }
-        .projects {
+        .opportunities {
             padding: 3rem 1rem;
-            overflow: hidden;
         }
-        .projects h2 {
-            font-size: 1.875rem;
+        .opportunities h2 {
             text-align: center;
             margin-bottom: 2rem;
+            font-size: 1.875rem;
         }
         .project-slider {
             display: flex;
@@ -178,7 +163,7 @@
         }
         .project-stats {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
+            grid-template-columns: repeat(2, 1fr);
             gap: 1rem;
             margin-bottom: 1rem;
         }
@@ -200,15 +185,6 @@
             color: inherit;
         }
     </style>
-    <!-- Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-1FP8G4JTGR"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-
-      gtag('config', 'G-1FP8G4JTGR');
-    </script>
 </head>
 <body>
     <header>
@@ -229,29 +205,25 @@
     </nav>
 
     <main>
-        <section id="hero" class="hero">
-            <div class="background-image"></div>
-            <video autoplay loop muted playsinline>
-                <source src="public/eco-video-background.mp4" type="video/mp4">
-                Your browser does not support the video tag.
-            </video>
-            <div class="hero-overlay"></div>
+        <section class="hero">
             <div class="hero-content">
-                <!-- Hero content will be dynamically inserted here -->
+                <h1>Unlock Spain's Renewable Energy Expertise</h1>
+                <p>Collaborate with Industry Leaders in Sustainable Innovation</p>
+                <a href="./form.html" class="btn">Learn About Opportunities</a>
             </div>
         </section>
 
-        <section class="projects" id="projects">
-            <h2>Featured Projects</h2>
+        <section id="opportunities" class="opportunities">
+            <h2>Featured Investments</h2>
             <div class="project-slider" id="projectSlider">
                 <!-- Project cards will be dynamically inserted here -->
             </div>
         </section>
-
-        <footer>
-            <p>&copy; 2024 Greenify. All rights reserved.</p>
-        </footer>
     </main>
+
+    <footer>
+        <p>&copy; 2024 Greenify. All rights reserved.</p>
+    </footer>
 
     <!-- Firebase App (the core Firebase SDK) is always required and must be listed first -->
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
@@ -261,45 +233,20 @@
     <script>
         // Your web app's Firebase configuration
         const firebaseConfig = {
-        apiKey: "AIzaSyBY2EBA0KnOYZDjxCwSHBMGcLaFjG6IL4o",
-        authDomain: "greenify-e91f0.firebaseapp.com",
-        projectId: "greenify-e91f0",
-        storageBucket: "greenify-e91f0.appspot.com",
-        messagingSenderId: "995349170683",
-        appId: "1:995349170683:web:10bc48311fbf4a2710235e",
-        measurementId: "G-1FP8G4JTGR"
-      };
+            apiKey: "AIzaSyBY2EBA0KnOYZDjxCwSHBMGcLaFjG6IL4o",
+            authDomain: "greenify-e91f0.firebaseapp.com",
+            projectId: "greenify-e91f0",
+            storageBucket: "greenify-e91f0.appspot.com",
+            messagingSenderId: "995349170683",
+            appId: "1:995349170683:web:10bc48311fbf4a2710235e",
+            measurementId: "G-1FP8G4JTGR"
+        };
 
         // Initialize Firebase
         firebase.initializeApp(firebaseConfig);
 
         // Get a reference to the database service
         const db = firebase.firestore();
-        const investButtons = document.querySelectorAll('.invest-btn');
-            investButtons.forEach(button => {
-                button.addEventListener('click', function(e) {
-                    const projectTitle = this.getAttribute('data-project-title');
-                    localStorage.setItem('selectedProject', projectTitle);
-                    console.log('Project title set:', projectTitle); // For debugging
-                });
-            });
-
-            function setupInvestButtonListeners() {
-                const investButtons = document.querySelectorAll('.invest-btn');
-                investButtons.forEach(button => {
-                    button.addEventListener('click', function(e) {
-                        const projectTitle = this.getAttribute('data-project-title');
-                        localStorage.setItem('selectedProject', projectTitle);
-                        console.log('Project title set:', projectTitle);
-                        
-                        // Google Analytics event tracking
-                        gtag('event', 'get_info_click', {
-                            'event_category': 'Project Interaction',
-                            'event_label': projectTitle
-                        });
-                    });
-                });
-            }
 
         document.addEventListener('DOMContentLoaded', function() {
             const menuBtn = document.querySelector('.menu-btn');
@@ -324,10 +271,6 @@
             });
 
             function createProjectCard(project) {
-                const urlParams = new URLSearchParams(window.location.search);
-                const intent = urlParams.get('intent');
-                const formUrl = intent ? `form.html?intent=${intent}` : 'form.html';
-
                 const card = document.createElement('div');
                 card.className = 'project-card';
                 card.innerHTML = `
@@ -344,13 +287,9 @@
                                 <p>${project.duration}</p>
                                 <p>Duration</p>
                             </div>
-                            <div class="stat-item">
-                                <p>${project.investors}</p>
-                                <p>Investors</p>
-                            </div>
                         </div>
                         <div style="text-align: center;">
-                            <a href="${formUrl}" class="btn invest-btn" data-project-title="${project.title}">Get Info</a>
+                            <a href="form.html" class="btn invest-btn" data-project-title="${project.title}">Get Info</a>
                         </div>
                     </div>
                 `;
@@ -412,73 +351,6 @@
                     });
                 });
             }
-
-            function setProjectTitle(title) {
-                localStorage.setItem('selectedProject', title);
-                console.log('Project title set:', title); // For debugging
-            }
-
-            const video = document.querySelector('.hero video');
-            video.addEventListener('loadeddata', function() {
-                video.style.opacity = '1';
-            });
-
-            const urlParams = new URLSearchParams(window.location.search);
-            const intent = urlParams.get('intent');
-            const heroContent = document.querySelector('.hero-content');
-            const backgroundImage = document.querySelector('.background-image');
-            const heroVideo = document.querySelector('.hero video');
-
-            switch(intent) {
-                case 'investment':
-                    heroContent.innerHTML = `
-                        <h1>Maximize Green Returns</h1>
-                        <p>Diversify with sustainable energy investments</p>
-                        <a href="./form.html" class="btn">Learn About Opportunities</a>
-                    `;
-                    backgroundImage.style.backgroundImage = "url('public/investor-hero-image.webp')";
-                    heroVideo.style.display = 'none';
-                    break;
-                case 'business':
-                    heroContent.innerHTML = `
-                        <h1>Unlock Spain's Renewable Energy Expertise</h1>
-                        <p>Collaborate with Industry Leaders in Sustainable Innovation</p>
-                        <a href="./form.html" class="btn">Learn About Opportunities</a>
-                    `;
-                    backgroundImage.style.backgroundImage = "url('public/investor-hero-image.webp')";
-                    heroVideo.style.display = 'none';
-                    break;
-                default:
-                    heroContent.innerHTML = `
-                        <h1>Crowdfunding for Green Projects in Europe</h1>
-                        <a href="form.html" class="btn">Get Info</a>
-                    `;
-                    // Keep the default video background
-                    heroVideo.style.display = 'block';
-                    break;
-            }
-
-            // Add this function in the <script> tag
-            function addIntentToLinks() {
-                const urlParams = new URLSearchParams(window.location.search);
-                const intent = urlParams.get('intent');
-                if (intent) {
-                    document.querySelectorAll('a').forEach(link => {
-                        if (link.href.includes(window.location.origin)) {
-                            link.href = addIntentToUrl(link.href, intent);
-                        }
-                    });
-                }
-            }
-
-            function addIntentToUrl(url, intent) {
-                const urlObj = new URL(url);
-                urlObj.searchParams.set('intent', intent);
-                return urlObj.toString();
-            }
-
-            // Call this function after the DOM is loaded
-            addIntentToLinks();
         });
     </script>
 </body>
