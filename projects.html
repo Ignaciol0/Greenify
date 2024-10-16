@@ -136,7 +136,14 @@
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
     <!-- Add Firebase products that you want to use -->
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
-
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-1FP8G4JTGR"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+    
+      gtag('config', 'G-1FP8G4JTGR');
+    </script>
     <script>
         // Your web app's Firebase configuration
         const firebaseConfig = {
@@ -206,7 +213,13 @@
                     button.addEventListener('click', function(e) {
                         const projectTitle = this.getAttribute('data-project-title');
                         localStorage.setItem('selectedProject', projectTitle);
-                        console.log('Project title set:', projectTitle); // For debugging
+                        console.log('Project title set:', projectTitle);
+                        
+                        // Google Analytics event tracking
+                        gtag('event', 'get_info_click', {
+                            'event_category': 'Project Interaction',
+                            'event_label': projectTitle
+                        });
                     });
                 });
             }

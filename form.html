@@ -349,7 +349,13 @@
                     projectTitle: projectTitleInput.value
                 };
 
-                console.log('Form data to be submitted:', formData); // For debugging
+                console.log('Form data to be submitted:', formData);
+
+                // Google Analytics event tracking
+                gtag('event', 'form_submission', {
+                    'event_category': 'Form Interaction',
+                    'event_label': formData.projectTitle
+                });
 
                 // Add data to Firebase
                 db.collection("userInfo").add(formData)
@@ -361,11 +367,34 @@
                         phoneGroup.style.display = 'none';
                         localStorage.removeItem('selectedProject');  // Clear the stored project
                         console.log('localStorage cleared'); // For debugging
+
+                        // Google Analytics event tracking for successful submission
+                        gtag('event', 'form_submission_success', {
+                            'event_category': 'Form Interaction',
+                            'event_label': formData.projectTitle
+                        });
                     })
                     .catch((error) => {
                         console.error("Error adding document: ", error);
                         alert('There was an error submitting your registration. Please try again.');
+
+                        // Google Analytics event tracking for submission error
+                        gtag('event', 'form_submission_error', {
+                            'event_category': 'Form Interaction',
+                            'event_label': formData.projectTitle
+                        });
                     });
+            });
+
+            // Add this after your existing event listeners
+            const formFields = form.querySelectorAll('input, select');
+            formFields.forEach(field => {
+                field.addEventListener('change', function() {
+                    gtag('event', 'form_field_change', {
+                        'event_category': 'Form Interaction',
+                        'event_label': this.name
+                    });
+                });
             });
         });
     </script>

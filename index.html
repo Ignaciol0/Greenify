@@ -78,6 +78,16 @@
             justify-content: center;
             overflow: hidden;
         }
+        .background-image {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('public/eco-background.jpg');
+            background-size: cover;
+            background-position: center;
+        }
         .hero video {
             position: absolute;
             top: 0;
@@ -85,6 +95,8 @@
             width: 101%;
             height: 100%;
             object-fit: cover;
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
         }
         .hero-overlay {
             position: absolute;
@@ -188,6 +200,15 @@
             color: inherit;
         }
     </style>
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-1FP8G4JTGR"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-1FP8G4JTGR');
+    </script>
 </head>
 <body>
     <header>
@@ -208,6 +229,7 @@
     </nav>
 
     <section class="hero">
+        <div class="background-image"></div>
         <video autoplay loop muted playsinline>
             <source src="public/eco-video-background.mp4" type="video/mp4">
             Your browser does not support the video tag.
@@ -215,7 +237,7 @@
         <div class="hero-overlay"></div>
         <div class="hero-content">
             <h1>Crowdfunding for Green Projects in Europe</h1>
-            <a href="form.html"	 class="btn">Get Info</a>
+            <a href="form.html" class="btn">Get Info</a>
         </div>
     </section>
 
@@ -260,6 +282,23 @@
                     console.log('Project title set:', projectTitle); // For debugging
                 });
             });
+
+            function setupInvestButtonListeners() {
+                const investButtons = document.querySelectorAll('.invest-btn');
+                investButtons.forEach(button => {
+                    button.addEventListener('click', function(e) {
+                        const projectTitle = this.getAttribute('data-project-title');
+                        localStorage.setItem('selectedProject', projectTitle);
+                        console.log('Project title set:', projectTitle);
+                        
+                        // Google Analytics event tracking
+                        gtag('event', 'get_info_click', {
+                            'event_category': 'Project Interaction',
+                            'event_label': projectTitle
+                        });
+                    });
+                });
+            }
 
         document.addEventListener('DOMContentLoaded', function() {
             const menuBtn = document.querySelector('.menu-btn');
@@ -373,6 +412,11 @@
                 localStorage.setItem('selectedProject', title);
                 console.log('Project title set:', title); // For debugging
             }
+
+            const video = document.querySelector('.hero video');
+            video.addEventListener('loadeddata', function() {
+                video.style.opacity = '1';
+            });
         });
     </script>
 </body>
