@@ -116,6 +116,15 @@
             a.appendChild(r);
         })(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');
     </script>
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-1FP8G4JTGR"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-1FP8G4JTGR');
+    </script>
 </head>
 <body>
     <header>
@@ -361,16 +370,18 @@
                     email: emailInput.value || null,
                     phone: contactTypeSelect.value === 'phone' ? phonePrefixSelect.value + phoneInput.value : null,
                     projectTitle: projectTitleInput.value,
-                    intent: intent || 'default'  // Include the intent in the form data
+                    intent: intent || 'default'
                 };
 
                 console.log('Form data to be submitted:', formData);
 
                 // Google Analytics event tracking
-                gtag('event', 'form_submission', {
-                    'event_category': 'Form Interaction',
-                    'event_label': formData.projectTitle
-                });
+                if (typeof gtag === 'function') {
+                    gtag('event', 'form_submission', {
+                        'event_category': 'Form Interaction',
+                        'event_label': formData.projectTitle
+                    });
+                }
 
                 // Add data to Firebase
                 db.collection("userInfo").add(formData)
@@ -380,24 +391,28 @@
                         form.reset();
                         emailGroup.style.display = 'none';
                         phoneGroup.style.display = 'none';
-                        localStorage.removeItem('selectedProject');  // Clear the stored project
-                        console.log('localStorage cleared'); // For debugging
+                        localStorage.removeItem('selectedProject');
+                        console.log('localStorage cleared');
 
                         // Google Analytics event tracking for successful submission
-                        gtag('event', 'form_submission_success', {
-                            'event_category': 'Form Interaction',
-                            'event_label': formData.projectTitle
-                        });
+                        if (typeof gtag === 'function') {
+                            gtag('event', 'form_submission_success', {
+                                'event_category': 'Form Interaction',
+                                'event_label': formData.projectTitle
+                            });
+                        }
                     })
                     .catch((error) => {
                         console.error("Error adding document: ", error);
                         alert('There was an error submitting your registration. Please try again.');
 
                         // Google Analytics event tracking for submission error
-                        gtag('event', 'form_submission_error', {
-                            'event_category': 'Form Interaction',
-                            'event_label': formData.projectTitle
-                        });
+                        if (typeof gtag === 'function') {
+                            gtag('event', 'form_submission_error', {
+                                'event_category': 'Form Interaction',
+                                'event_label': formData.projectTitle
+                            });
+                        }
                     });
             });
 
@@ -405,10 +420,12 @@
             const formFields = form.querySelectorAll('input, select');
             formFields.forEach(field => {
                 field.addEventListener('change', function() {
-                    gtag('event', 'form_field_change', {
-                        'event_category': 'Form Interaction',
-                        'event_label': this.name
-                    });
+                    if (typeof gtag === 'function') {
+                        gtag('event', 'form_field_change', {
+                            'event_category': 'Form Interaction',
+                            'event_label': this.name
+                        });
+                    }
                 });
             });
         });
