@@ -147,47 +147,76 @@
             -webkit-overflow-scrolling: touch;
             scrollbar-width: none;
             -ms-overflow-style: none;
+            gap: 1rem;
+            padding-bottom: 1rem;
         }
         .project-slider::-webkit-scrollbar {
             display: none;
         }
         .project-card {
             flex: 0 0 300px;
-            background-color: white;
-            border-radius: 0.5rem;
-            overflow: hidden;
-            margin-right: 1rem;
             scroll-snap-align: start;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
         }
         .project-image {
-            height: 12rem;
+            height: 150px;
             background-size: cover;
             background-position: center;
         }
         .project-content {
-            padding: 1rem;
+            padding: 16px;
         }
         .project-title {
-            font-size: 1.25rem;
-            margin-bottom: 0.5rem;
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 8px;
         }
         .project-description {
-            color: #64748b;
-            margin-bottom: 1rem;
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 16px;
         }
         .project-stats {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 1rem;
-            margin-bottom: 1rem;
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 16px;
         }
-        .stat-item p:first-child {
+        .stat-item {
+            text-align: center;
+        }
+        .stat-value {
+            font-size: 16px;
             font-weight: bold;
         }
-        .stat-item p:last-child {
-            color: #64748b;
-            font-size: 0.875rem;
+        .stat-label {
+            font-size: 12px;
+            color: #666;
+        }
+        .progress-bar {
+            background-color: #e0e0e0;
+            height: 8px;
+            border-radius: 4px;
+            overflow: hidden;
+            margin-bottom: 8px;
+        }
+        .progress-fill {
+            background-color: #4CAF50;
+            height: 100%;
+        }
+        .funding-info {
+            display: flex;
+            justify-content: space-between;
+            font-size: 14px;
+        }
+        .funding-left {
+            color: #4CAF50;
+            font-weight: bold;
+        }
+        .total-investors {
+            color: #666;
         }
         footer {
             background-color: #4a6741;
@@ -338,28 +367,37 @@
                 const intent = urlParams.get('intent');
                 const formUrl = intent ? `form.html?intent=${intent}` : 'form.html';
 
+                const progressPercentage = 100 - (project['Amount left'] / project.MaximumAmount * 100);
+
                 const card = document.createElement('div');
                 card.className = 'project-card';
                 card.innerHTML = `
                     <div class="project-image" style="background-image: url('public/${project.imageUrl}');"></div>
                     <div class="project-content">
-                        <h3 class="project-title">${project.title}</h3>
+                        <h2 class="project-title">${project.title}</h2>
                         <p class="project-description">${project.description}</p>
                         <div class="project-stats">
                             <div class="stat-item">
-                                <p>${project.annualReturn}</p>
-                                <p>Annual Return</p>
+                                <div class="stat-value">${project.annualReturn}</div>
+                                <div class="stat-label">Annual Return</div>
                             </div>
                             <div class="stat-item">
-                                <p>${project.duration}</p>
-                                <p>Duration</p>
+                                <div class="stat-value">${project.duration.split(' ')[0]}</div>
+                                <div class="stat-label">Duration (months)</div>
                             </div>
                             <div class="stat-item">
-                                <p>${project.investors}</p>
-                                <p>Investors</p>
+                                <div class="stat-value">${project.co2Reduction}</div>
+                                <div class="stat-label">Carbon Credits/Year</div>
                             </div>
                         </div>
-                        <div style="text-align: center;">
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: ${progressPercentage}%;"></div>
+                        </div>
+                        <div class="funding-info">
+                            <span class="funding-left">€${project['Amount left']} left</span>
+                            <span class="total-investors">${project.investors} investors</span>
+                        </div>
+                        <div style="text-align: center; margin-top: 16px;">
                             <a href="${formUrl}" class="btn invest-btn" data-project-title="${project.title}">Get Info</a>
                         </div>
                     </div>
@@ -375,41 +413,31 @@
 
                 slider.addEventListener('mousedown', (e) => {
                     isDown = true;
-                    slider.classList.add('active');
+                    slider.style.cursor = 'grabbing';
                     startX = e.pageX - slider.offsetLeft;
                     scrollLeft = slider.scrollLeft;
                 });
 
                 slider.addEventListener('mouseleave', () => {
                     isDown = false;
-                    slider.classList.remove('active');
+                    slider.style.cursor = 'grab';
                 });
 
                 slider.addEventListener('mouseup', () => {
                     isDown = false;
-                    slider.classList.remove('active');
+                    slider.style.cursor = 'grab';
                 });
 
                 slider.addEventListener('mousemove', (e) => {
                     if (!isDown) return;
                     e.preventDefault();
                     const x = e.pageX - slider.offsetLeft;
-                    const walk = (x - startX) * 3;
+                    const walk = (x - startX) * 2;
                     slider.scrollLeft = scrollLeft - walk;
                 });
 
-                // Infinite scroll effect
-                slider.addEventListener('scroll', () => {
-                    if (slider.scrollLeft + slider.clientWidth >= slider.scrollWidth - 1) {
-                        const firstCard = slider.firstElementChild;
-                        slider.appendChild(firstCard.cloneNode(true));
-                        slider.scrollLeft -= firstCard.offsetWidth;
-                    } else if (slider.scrollLeft <= 0) {
-                        const lastCard = slider.lastElementChild;
-                        slider.prepend(lastCard.cloneNode(true));
-                        slider.scrollLeft += lastCard.offsetWidth;
-                    }
-                });
+                // Remove the infinite scroll effect
+                // slider.addEventListener('scroll', () => { ... });
             }
 
             function setupInvestButtonListeners() {
@@ -460,7 +488,7 @@
                     break;
                 default:
                     heroContent.innerHTML = `
-                        <h1>Crowdfunding for Green Projects in Europe</h1>
+                        <h1>Invest in Green Projects and Offset Your Carbon Footprint</h1>
                         <a href="form.html" class="btn">Get Info</a>
                     `;
                     // Keep the default video background
